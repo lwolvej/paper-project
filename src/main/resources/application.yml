@@ -1,0 +1,47 @@
+server:
+  port: 6374
+
+spring:
+  datasource:
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library_paper_project?characterEncoding=utf8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    hikari:
+      connection-timeout: 80000
+      idle-timeout: 300000
+      max-lifetime: 1500000
+      maximum-pool-size: 200
+      minimum-idle: 120
+      connection-test-query: select 1
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+  jpa:
+    show-sql: false
+    database: mysql
+    #这里需要加上对应数据库的方言，否则会报错
+    database-platform: org.hibernate.dialect.MySQLDialect
+    open-in-view: true
+    hibernate:
+      ddl-auto: validate
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    lettuce:
+      shutdown-timeout: 100ms
+      pool:
+        max-active: 50
+        min-idle: 10
+        max-wait: 6000
+        max-idle: 50
+
