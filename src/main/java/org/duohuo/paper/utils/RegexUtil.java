@@ -18,6 +18,10 @@ public final class RegexUtil {
         return validation(Constants.LETTER_REGEX, letter);
     }
 
+    public static Boolean imageRegex(String imageName) {
+        return validation(Constants.FILE_IMAGE_REGEX, imageName);
+    }
+
     public static Boolean userNameValidation(String userName) {
         return validation(Constants.USER_NAME_REGEX, userName);
     }

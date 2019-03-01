@@ -22,14 +22,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service("journalExcelService")
+@Service("journalExcelServiceImpl")
 public class JournalExcelServiceImpl implements JournalExcelService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JournalExcelServiceImpl.class);
@@ -47,10 +47,10 @@ public class JournalExcelServiceImpl implements JournalExcelService {
     private RedisRepository redisRepository;
 
     @Override
-    public JsonResult insertJournalExcel(InputStream stream, Integer year, Integer month, String fileName) {
+    public JsonResult insertJournalExcel(byte[] data, Integer year, Integer month, String fileName) {
         AnalysisEventListener listener;
         //创建InputStream,之后读取excel文件
-        try (InputStream inputStream = new BufferedInputStream(stream)) {
+        try (InputStream inputStream = new ByteArrayInputStream(data)) {
             listener = new JournalExcelListener();
             ExcelReader reader = new ExcelReader(inputStream, null, listener);
             reader.read(new Sheet(1, 1, JournalExcelModel.class));

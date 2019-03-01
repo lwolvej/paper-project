@@ -2,6 +2,7 @@ package org.duohuo.paper.repository;
 
 import org.duohuo.paper.model.Paper;
 import org.duohuo.paper.model.PaperType;
+import org.duohuo.paper.model.Time;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository("paperRepository")
 public interface PaperRepository extends JpaRepository<Paper, Long> {
@@ -65,9 +67,9 @@ public interface PaperRepository extends JpaRepository<Paper, Long> {
 
     Boolean existsByAccessionNumber(String accessionNumber);
 
-    Paper findByAccessionNumber(String accessionNumber);
+    Optional<Paper> findByAccessionNumberAndTime(String accessionNumber, Time time);
 
-    Boolean deleteAllByTime_TimeIdInAndPaperTypeIn(List<Integer> timeIdList, List<PaperType> paperTypeList);
+    void deleteAllByTime_TimeIdInAndPaperTypeIn(List<Integer> timeIdList, List<PaperType> paperTypeList);
 
     @Query(value = "SELECT * FROM paper_info WHERE MATCH (article_name)AGAINST(?1)", nativeQuery = true)
     List<Paper> findAllByKeyWord(String keyWord);

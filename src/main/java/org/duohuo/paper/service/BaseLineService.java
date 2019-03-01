@@ -13,5 +13,5 @@ public interface BaseLineService {
     JsonResult searchByAll();
 
     @Transactional
-    JsonResult insertBaseLineData(InputStream stream, String fileName) throws Exception;
+    JsonResult insertBaseLineData(byte[] data, String fileName) throws Exception;
 }

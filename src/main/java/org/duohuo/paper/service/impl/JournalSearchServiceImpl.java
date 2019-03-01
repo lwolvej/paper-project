@@ -377,11 +377,8 @@ public class JournalSearchServiceImpl extends JournalSearchServiceHelperImpl imp
         List<Integer> monthList = new ArrayList<>();
         monthList.add(month);
         List<Integer> timeIdList = createTimeIdListByYearAndMonth(yearList, monthList);
-        if (journalRepository.deleteAllByTime_TimeIdIn(timeIdList)) {
-            redisRepository.delByPattern("journal_*");
-            return new JsonResult(HttpStatus.OK.value(), HttpStatus.OK.name(), true);
-        } else {
-            return new JsonResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.name(), false);
-        }
+        journalRepository.deleteAllByTime_TimeIdIn(timeIdList);
+        redisRepository.delByPattern("journal_*");
+        return new JsonResult(HttpStatus.OK.value(), HttpStatus.OK.name(), true);
     }
 }

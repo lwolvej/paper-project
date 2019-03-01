@@ -63,9 +63,9 @@ public class BaseLineServiceImpl implements BaseLineService {
 
     @SuppressWarnings("unchecked")
     @Override
-    public JsonResult insertBaseLineData(InputStream stream, String fileName) throws Exception {
+    public JsonResult insertBaseLineData(byte[] data, String fileName) throws Exception {
         List<Object> originalObjects;
-        try (InputStream inputStream = new BufferedInputStream(stream)) {
+        try (InputStream inputStream = new ByteArrayInputStream(data)) {
             AnalysisEventListener listener = new BaseLineExcelListener();
             ExcelReader reader = new ExcelReader(inputStream, ExcelTypeEnum.XLSX, null, listener);
             reader.read();

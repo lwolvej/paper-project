@@ -7,16 +7,18 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.duohuo.paper.excel.model.download.JournalDownloadModel;
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLDecoder;
 
 
 public final class ExcelUtil {
 
     public static String getJarPath() {
-        String path = ExcelUtil.class.getProtectionDomain()
-                .getCodeSource().getLocation()
-                .getPath();
-        return path.substring(path.lastIndexOf(System.getProperty("path.separator")) + 1,
-                path.lastIndexOf(File.separator) + 1);
+        String path = System.getProperty("java.class.path");
+        return path.substring(
+                path.lastIndexOf(System.getProperty("path.separator")) + 1,
+                path.lastIndexOf(File.separator) + 1
+        );
     }
 
     public static Sheet createJournalSheet() {

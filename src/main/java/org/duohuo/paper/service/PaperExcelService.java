@@ -4,9 +4,10 @@ import org.duohuo.paper.model.result.JsonResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
+import java.util.List;
 
 public interface PaperExcelService {
 
     @Transactional
-    JsonResult insertPaperExcel(InputStream stream, Integer year, Integer month, Integer type, String fileName);
+    JsonResult insertPaperExcel(List<String> filePaths, Integer year, Integer month, Integer type, String fileName);
 }

@@ -372,12 +372,9 @@ public class PaperSearchServiceHelperImpl extends AbstractSearchService implemen
         yearList.add(year);
         monthList.add(month);
         List<Integer> timeIdList = createTimeId(yearList, monthList);
-        if (paperRepository.deleteAllByTime_TimeIdInAndPaperTypeIn(timeIdList, paperTypeList)) {
-            redisRepository.delByPattern("paper_*");
-            return new JsonResult(HttpStatus.OK.value(), HttpStatus.OK.name(), true);
-        } else {
-            return new JsonResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.name(), false);
-        }
+        paperRepository.deleteAllByTime_TimeIdInAndPaperTypeIn(timeIdList, paperTypeList);
+        redisRepository.delByPattern("paper_*");
+        return new JsonResult(HttpStatus.OK.value(), HttpStatus.OK.name(), true);
     }
 
     /******/

@@ -30,13 +30,12 @@ public class Paper implements Serializable {
     private String pmid;
 
     @Lob
-    @Basic(fetch = FetchType.EAGER)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "article_name", columnDefinition = "TEXT")
     private String articleName;
 
-    //全部使用立即加载，因为这里的数据都是需要立即使用的！
     @Lob
-    @Basic(fetch = FetchType.EAGER)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "authors", columnDefinition = "TEXT")
     private String authors;
 
@@ -50,17 +49,17 @@ public class Paper implements Serializable {
     private Integer timesCited;
 
     @Lob
-    @Basic(fetch = FetchType.EAGER)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "countries", columnDefinition = "TEXT")
     private String countries;
 
     @Lob
-    @Basic(fetch = FetchType.EAGER)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "addresses", columnDefinition = "TEXT")
     private String addresses;
 
     @Lob
-    @Basic(fetch = FetchType.EAGER)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "institutions", columnDefinition = "TEXT")
     private String institutions;
 

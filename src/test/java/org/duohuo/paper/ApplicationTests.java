@@ -19,6 +19,8 @@
 //import org.duohuo.paper.service.BaseLineService;
 //import org.duohuo.paper.service.JournalSearchService;
 //import org.duohuo.paper.service.PaperSearchService;
+//import org.duohuo.paper.utils.FileUtil;
+//import org.duohuo.paper.utils.RegexUtil;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
 //import org.slf4j.Logger;
@@ -28,6 +30,7 @@
 //import org.springframework.data.domain.PageRequest;
 //import org.springframework.data.domain.Pageable;
 //import org.springframework.data.domain.Sort;
+//import org.springframework.test.annotation.Rollback;
 //import org.springframework.test.context.junit4.SpringRunner;
 //
 //import javax.annotation.Resource;
@@ -149,64 +152,64 @@
 //
 //    @Test
 //    public void savePaper2() {
-//        File[] files = new File("/Users/lwolvej/IdeaProjects/paper/src/main/resources/excel").listFiles();
-//        if (files != null) {
-//            Map<String, Category> categoryMap = categoryRepository.findAll().stream()
-//                    .collect(Collectors.toMap(Category::getCategoryName, category -> category));
-//            Time time = new Time();
-//            time.setYear(2018);
-//            time.setMonth(3);
-//            time.setTimeId("201803".hashCode());
-//            for (File file : files) {
-//                String categoryName = file.getName().split("-")[0];
-//                if (categoryMap.containsKey(categoryName)) {
-//                    Category category = categoryMap.get(categoryName);
-//                    List<PaperExcelModel> paperExcelModels = null;
-//                    try (InputStream inputStream = new FileInputStream(file)) {
-//                        AnalysisEventListener listener = new PaperExcelListener();
-//                        ExcelReader reader = new ExcelReader(inputStream, ExcelTypeEnum.XLSX, null, listener);
-//                        reader.read(new Sheet(1, 6, PaperExcelModel.class));
-//                        paperExcelModels = ((PaperExcelListener) listener).getVector();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                    if (paperExcelModels != null) {
-//                        List<Paper> papers = paperExcelModels
-//                                .stream()
-//                                .map(elem -> elem.convertToPaper(PaperType.HOT_PAPER, category, time))
-//                                .collect(Collectors.toList());
-//                        for (Paper paper : papers) {
-//                            if (paperRepository.existsByAccessionNumber(paper.getAccessionNumber())) {
-//                                System.out.println("paper已存在:" + paper);
-//                                Paper tt = paperRepository.findByAccessionNumber(paper.getAccessionNumber());
-//                                tt.setTime(paper.getTime());
-//                                tt.setCategory(paper.getCategory());
-//                                tt.setTimesCited(paper.getTimesCited());
-//                                tt.setArticleName(paper.getArticleName());
-//                                tt.setPaperType(paper.getPaperType());
-//                                tt.setAuthors(paper.getAuthors());
-//                                tt.setAddresses(paper.getAddresses());
-//                                tt.setPublicationDate(paper.getPublicationDate());
-//                                tt.setResearchField(paper.getResearchField());
-//                                tt.setDoi(paper.getDoi());
-//                                tt.setSource(paper.getSource());
-//                                tt.setInstitutions(paper.getInstitutions());
-//                                tt.setPmid(paper.getPmid());
-//                                paperRepository.save(tt);
-//                            } else {
-//                                paperRepository.save(paper);
-//                            }
-//                        }
-////                        paperRepository.saveAll(papers);
-////                        LOGGER.info("成功");
-//                    } else {
-//                        LOGGER.error("处理excel失败");
-//                    }
-//                } else {
-//                    System.out.println("类别不存在:" + categoryName);
-//                }
-//            }
-//        }
+////        File[] files = new File("/Users/lwolvej/IdeaProjects/paper/src/main/resources/excel").listFiles();
+////        if (files != null) {
+////            Map<String, Category> categoryMap = categoryRepository.findAll().stream()
+////                    .collect(Collectors.toMap(Category::getCategoryName, category -> category));
+////            Time time = new Time();
+////            time.setYear(2018);
+////            time.setMonth(3);
+////            time.setTimeId("201803".hashCode());
+////            for (File file : files) {
+////                String categoryName = file.getName().split("-")[0];
+////                if (categoryMap.containsKey(categoryName)) {
+////                    Category category = categoryMap.get(categoryName);
+////                    List<PaperExcelModel> paperExcelModels = null;
+////                    try (InputStream inputStream = new FileInputStream(file)) {
+////                        AnalysisEventListener listener = new PaperExcelListener();
+////                        ExcelReader reader = new ExcelReader(inputStream, ExcelTypeEnum.XLSX, null, listener);
+////                        reader.read(new Sheet(1, 6, PaperExcelModel.class));
+////                        paperExcelModels = ((PaperExcelListener) listener).getVector();
+////                    } catch (Exception e) {
+////                        e.printStackTrace();
+////                    }
+////                    if (paperExcelModels != null) {
+////                        List<Paper> papers = paperExcelModels
+////                                .stream()
+////                                .map(elem -> elem.convertToPaper(PaperType.HOT_PAPER, category, time))
+////                                .collect(Collectors.toList());
+////                        for (Paper paper : papers) {
+////                            if (paperRepository.existsByAccessionNumber(paper.getAccessionNumber())) {
+////                                System.out.println("paper已存在:" + paper);
+////                                Paper tt = paperRepository.findByAccessionNumber(paper.getAccessionNumber());
+////                                tt.setTime(paper.getTime());
+////                                tt.setCategory(paper.getCategory());
+////                                tt.setTimesCited(paper.getTimesCited());
+////                                tt.setArticleName(paper.getArticleName());
+////                                tt.setPaperType(paper.getPaperType());
+////                                tt.setAuthors(paper.getAuthors());
+////                                tt.setAddresses(paper.getAddresses());
+////                                tt.setPublicationDate(paper.getPublicationDate());
+////                                tt.setResearchField(paper.getResearchField());
+////                                tt.setDoi(paper.getDoi());
+////                                tt.setSource(paper.getSource());
+////                                tt.setInstitutions(paper.getInstitutions());
+////                                tt.setPmid(paper.getPmid());
+////                                paperRepository.save(tt);
+////                            } else {
+////                                paperRepository.save(paper);
+////                            }
+////                        }
+//////                        paperRepository.saveAll(papers);
+//////                        LOGGER.info("成功");
+////                    } else {
+////                        LOGGER.error("处理excel失败");
+////                    }
+////                } else {
+////                    System.out.println("类别不存在:" + categoryName);
+////                }
+////            }
+////        }
 //    }
 //
 //    @Test
@@ -610,5 +613,104 @@
 //    public void redisRepository() {
 //        redisRepository.delByPattern("journal_*");
 //    }
+//
+//    @Test
+//    public void paperInsertTest1() throws Exception {
+//        String targetPath = "/Users/lwolvej/Desktop";
+//        String path = "/Users/lwolvej/Desktop/Highly cited.zip";
+//        if (!RegexUtil.zipFileValidation(path)) {
+//            throw new RuntimeException("不是zip文件");
+//        }
+//        File file = new File(path);
+//        InputStream stream = new FileInputStream(file);
+//        byte[] data = new byte[stream.available() + 1];
+//        //noinspection ResultOfMethodCallIgnored
+//        stream.read(data);
+//        stream.close();
+//        List<String> filePaths = FileUtil.decompressZipFile(data, targetPath, targetPath + File.separator + Constants.TEMP_FILE_ESI_HIGHLY_PAPER, "Highly cited.zip");
+//        Time time = new Time();
+//        time.setYear(2018);
+//        time.setMonth(9);
+//        time.setTimeId("201809".hashCode());
+//
+////        List<String> newFilePaths = filePaths
+////                .stream()
+////                .map(elem -> {
+////                    if (elem.equals("_MACOSX")) {
+////                        new File(targetPath + File.separator + Constants.TEMP_FILE_ESI_HIGHLY_PAPER + File.separator + elem).deleteOnExit();
+////                    }
+////                    String[] tt = elem.split(File.separator);
+////                    return tt[tt.length - 1];
+////                })
+////                .collect(Collectors.toList());
+//
+//        List<Paper> paperList = new ArrayList<>();
+//        for (String filePath : filePaths) {
+//            File tempFile = new File(targetPath + File.separator + Constants.TEMP_FILE_ESI_HIGHLY_PAPER + File.separator + filePath);
+//            if (tempFile.isDirectory()) {
+//                if (filePath.equals("_MACOSX")) {
+//                    tempFile.deleteOnExit();
+//                }
+//                continue;
+//            }
+//            String fileName = tempFile.getName();
+//            if (!RegexUtil.excelFileValidation(fileName)) {
+//                throw new RuntimeException("文件名不正确" + filePath);
+//            }
+//            String categoryName = fileName.split("-")[0];
+//            if (categoryName.contains("_")) {
+//                categoryName = categoryName.replace("_", "/");
+//            }
+//            Category category = categoryRepository.findByCategoryName(categoryName).orElse(null);
+//            if (category == null) {
+//                throw new RuntimeException("该类别不存在" + categoryName);
+//            }
+//            List<PaperExcelModel> paperExcelModels = null;
+//            try (InputStream inputStream = new FileInputStream(new File(targetPath + File.separator + Constants.TEMP_FILE_ESI_HIGHLY_PAPER + File.separator + filePath))) {
+//                AnalysisEventListener listener = new PaperExcelListener();
+//                ExcelReader reader = new ExcelReader(inputStream, ExcelTypeEnum.XLSX, null, listener);
+//                reader.read(new Sheet(1, 6, PaperExcelModel.class));
+//                paperExcelModels = ((PaperExcelListener) listener).getVector();
+//            } catch (Exception e) {
+//                throw new RuntimeException(e.getMessage());
+//            }
+//            if (paperExcelModels == null) {
+//                throw new RuntimeException("excel文件为空!");
+//            }
+//            List<Paper> papers = paperExcelModels
+//                    .stream()
+//                    .map(paperExcelModel -> paperExcelModel.convertToPaper(PaperType.HC_PAPER, category, time))
+//                    .collect(Collectors.toList());
+//            paperList.addAll(papers);
+//        }
+//        paperList.forEach(System.out::println);
+//    }
+//
+//    @Test
+//    public void paperZipTest1() throws Exception {
+//        String targetPath = "/Users/lwolvej/Desktop";
+//        String path = "/Users/lwolvej/Desktop/Highly cited.zip";
+//        if (!RegexUtil.zipFileValidation(path)) {
+//            throw new RuntimeException("不是zip文件");
+//        }
+//        File file = new File(path);
+//        InputStream stream = new FileInputStream(file);
+//        byte[] data = new byte[stream.available() + 1];
+//        //noinspection ResultOfMethodCallIgnored
+//        stream.read(data);
+//        stream.close();
+//        List<String> filePaths = FileUtil.decompressZipFile(data, targetPath, targetPath + File.separator + Constants.TEMP_FILE_ESI_HIGHLY_PAPER, "Highly cited.zip");
+//
+//        //如果是带有文件夹的上传，会出现文件夹名称，这个时候
+//
+//        //首先过滤掉_MACOSX文件夹，然后找到剩余文件夹，
+//    }
+//
+//    @Test
+//    public void paperFilePathTest1() {
+//        File file = new File("/Users/lwolvej/Desktop/temp_file_esi_highly_paper/Highly cited/");
+//        System.out.println(file.isDirectory());
+//    }
+//
 //
 //}

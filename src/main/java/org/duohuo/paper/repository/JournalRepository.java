@@ -45,7 +45,7 @@ public interface JournalRepository extends JpaRepository<Journal, Long> {
 
     List<Journal> findAllByCategory_CategoryIdInAndTime_TimeIdIn(List<Integer> categoryIdList, List<Integer> timeIdList);
 
-    Boolean deleteAllByTime_TimeIdIn(List<Integer> timeIdList);
+    void deleteAllByTime_TimeIdIn(List<Integer> timeIdList);
 
     Boolean existsByTime(Time time);
 

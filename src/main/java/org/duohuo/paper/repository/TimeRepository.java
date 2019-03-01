@@ -22,4 +22,6 @@ public interface TimeRepository extends JpaRepository<Time, Integer> {
 
     @Query(value = "SELECT * FROM time_period WHERE time_id<?1 ORDER BY time_id DESC LIMIT 1", nativeQuery = true)
     Optional<Time> findSecond(Integer maxTimeId);
+
+    Optional<Time> findByYearAndMonth(Integer year, Integer month);
 }

@@ -1,19 +1,21 @@
+# 删除已经存在的数据库创建新的
 DROP DATABASE IF EXISTS library_paper_project;
 CREATE DATABASE library_paper_project;
 USE library_paper_project;
 
+# 删除已经存在的表创建新的
 DROP TABLE IF EXISTS `category`;
 DROP TABLE IF EXISTS `time_period`;
 DROP TABLE IF EXISTS `journal_info`;
 DROP TABLE IF EXISTS `paper_info`;
 DROP TABLE IF EXISTS `user_info`;
 
-
 CREATE TABLE `category`
 (
   `category_id`   INT         NOT NULL AUTO_INCREMENT COMMENT '学科类别ID',
   `category_name` VARCHAR(88) NOT NULL COMMENT '学科类别名称',
-  PRIMARY KEY (`category_id`)
+  PRIMARY KEY (`category_id`),
+  KEY `category_name_index` (`category_name`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1024
   DEFAULT CHARSET = utf8 COMMENT ='学科类别表';
@@ -24,7 +26,9 @@ CREATE TABLE `time_period`
   `time_id` INT NOT NULL COMMENT '时间编号',
   `year`    INT NOT NULL COMMENT '年',
   `month`   INT NOT NULL COMMENT '月',
-  PRIMARY KEY (`time_id`)
+  PRIMARY KEY (`time_id`),
+  KEY `year_index` (`year`),
+  KEY `month_index` (`month`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT ='时间段表';
 
@@ -68,7 +72,7 @@ CREATE TABLE `paper_info`
   `paper_type`       INT          NOT NULL,
   PRIMARY KEY (`paper_id`),
   KEY `accession_number_index` (`accession_number`),
-  KEY `publication_date_index` (`publication_date`),
+  KEY `time_id_index` (`time_id`),
   KEY `category_id_index` (`category_id`),
   KEY `paper_type_index` (`paper_type`),
   KEY `doi_index` (`doi`),
@@ -78,6 +82,17 @@ CREATE TABLE `paper_info`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 # `doi`, `article_name`
+
+CREATE TABLE `school_paper_image_info`
+(
+  `image_id`   INT        NOT NULL,
+  `image_name` TEXT       NOT NULL,
+  `image_data` MEDIUMBLOB NOT NULL,
+  `paper_id`   BIGINT     NOT NULL,
+  KEY `paper_id_index` (`paper_id`),
+  FOREIGN KEY (`paper_id`) REFERENCES `paper_info` (`paper_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 CREATE TABLE `user_info`
 (
@@ -105,6 +120,9 @@ CREATE TABLE `base_line_info`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT = '基准线信息表';
 
+INSERT INTO `user_info`
+VALUES ('admin', 'admin', 'admin', 'edit');
+
 INSERT INTO `category`
 VALUES (1020, 'AGRICULTURAL SCIENCES'),
        (1023, 'ARTS & HUMANITIES'),
@@ -128,4 +146,5 @@ VALUES (1020, 'AGRICULTURAL SCIENCES'),
        (1003, 'PLANT & ANIMAL SCIENCE'),
        (1016, 'PSYCHIATRY/PSYCHOLOGY'),
        (1005, 'SOCIAL SCIENCES, GENERAL'),
-       (1012, 'SPACE SCIENCE');
+       (1012, 'SPACE SCIENCE'),
+       (1024, 'ALL FIELDS');

@@ -8,5 +8,5 @@ import java.io.InputStream;
 public interface JournalExcelService {
 
     @Transactional
-    JsonResult insertJournalExcel(InputStream stream, Integer year, Integer month, String fileName) throws Exception;
+    JsonResult insertJournalExcel(byte[] data, Integer year, Integer month, String fileName) throws Exception;
 }

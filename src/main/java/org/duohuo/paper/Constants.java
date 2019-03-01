@@ -20,6 +20,8 @@ public final class Constants {
     //通过判断文件后缀查看是否是标准的zip压缩包
     public static final String FILE_ZIP_REGEX = ".*(.zip|.ZIP)$";
 
+    public static final String FILE_IMAGE_REGEX = ".*(.png|.PNG)";
+
     //26个字母不分大小写
     public static final String LETTER_REGEX = "^[A-Za-z]+$";
 
