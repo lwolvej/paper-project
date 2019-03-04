@@ -1,10 +1,12 @@
 package org.duohuo.paper.controller;
 
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.metadata.BaseRowModel;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import net.lingala.zip4j.io.ZipInputStream;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -14,6 +16,7 @@ import org.duohuo.paper.model.Journal;
 import org.duohuo.paper.model.dto.*;
 import org.duohuo.paper.model.result.JsonResult;
 import org.duohuo.paper.service.JournalSearchService;
+import org.duohuo.paper.utils.DownloadUtil;
 import org.duohuo.paper.utils.ExcelUtil;
 import org.duohuo.paper.utils.ObjectUtil;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
@@ -89,27 +93,13 @@ public class JournalController {
     public ResponseEntity<byte[]> journalDownload(@ApiParam("下载的具体条目") @RequestBody DownloadDto downloadDto) throws Exception {
         List<Long> journalIdList = downloadDto.getData();
         List<Journal> esiInfos = journalSearchService.getJournalById(journalIdList);
-        List<JournalDownloadModel> esiExcelDownloads = esiInfos.stream().map(JournalDownloadModel::new).collect(Collectors.toList());
+        List<BaseRowModel> esiExcelDownloads = esiInfos.stream().map(JournalDownloadModel::new).collect(Collectors.toList());
         if (!ObjectUtil.ifNotNullList(esiExcelDownloads)) {
             throw new NotFoundException("Journal的id不正确");
         }
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ExcelWriter excelWriter = new ExcelWriter(outputStream, ExcelTypeEnum.XLSX, true);
-        excelWriter.write(esiExcelDownloads, ExcelUtil.createJournalSheet());
-        excelWriter.finish();
-        byte[] bytes = outputStream.toByteArray();
-        outputStream.close();
-        String fileName = new String(("JOURNAL " + DATE_FORMAT.format(new Date())).getBytes(), StandardCharsets.UTF_8);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Content-Disposition", "attachment;filename=" + fileName + ".xlsx");
-        httpHeaders.add("Pragma", "No-cache");
-        httpHeaders.add("Cache-Control", "No-cache");
-        httpHeaders.add("Access-Control-Expose-Headers", "Content-Disposition");
-        return ResponseEntity.ok()
-                .headers(httpHeaders)
-                .contentLength(bytes.length)
-                .contentType(MediaType.MULTIPART_FORM_DATA)
-                .body(bytes);
+        byte[] bytes = ExcelUtil.getDownByte(esiExcelDownloads, 2);
+        String fileName = Integer.toString(("JOURNAL " + DATE_FORMAT.format(new Date())).hashCode());
+        return DownloadUtil.getResponseEntity(fileName, bytes);
     }
 
 

@@ -37,7 +37,7 @@ public final class Constants {
     public static final Integer PAGE_SIZE = 10;
 
     //下载的日期格式
-    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy:MM:dd-HH:mm:ss");
 
     public static final String PAPER_KEYWORD_TYPE_AC = "accessionNumber";
 

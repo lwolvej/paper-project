@@ -86,7 +86,7 @@ public class UploadController {
         String jarPath = ExcelUtil.getJarPath();
         String resultPath = jarPath + File.separator + Constants.TEMP_FILE_SCHOOL_HIGHLY_PAPER;
         String fileName = file.getOriginalFilename();
-        return paperExcelService.insertPaperExcel(FileUtil.decompressZipFile(file.getBytes(), jarPath, resultPath, fileName), year, month, 4, file.getOriginalFilename());
+        return paperExcelService.insertPaperExcel(FileUtil.decompressZipFile(file.getBytes(), jarPath, resultPath, fileName), year, month, 3, file.getOriginalFilename());
     }
 
 

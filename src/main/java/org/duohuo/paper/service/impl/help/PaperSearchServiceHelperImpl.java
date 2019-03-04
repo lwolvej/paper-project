@@ -38,6 +38,11 @@ public class PaperSearchServiceHelperImpl extends AbstractSearchService implemen
     private RedisRepository redisRepository;
 
     @Override
+    public List<Paper> getPaperListById(List<Long> ids) {
+        return paperRepository.findAllByPaperIdIn(ids);
+    }
+
+    @Override
     public JsonResult searchByCategoryAndPaperType(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, Integer type) {
         List<Integer> newCategoryIdList = createCategoryId(categoryIdList);
         List<PaperType> paperTypes = createPaperType(type);

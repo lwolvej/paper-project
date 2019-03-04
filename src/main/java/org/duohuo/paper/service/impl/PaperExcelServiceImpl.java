@@ -91,7 +91,7 @@ public class PaperExcelServiceImpl implements PaperExcelService {
                 List<Paper> papers = getEsiPaperInfos(type, time, filePaths, typeFilePath, timeExists);
                 paperRepository.saveAll(papers);
             } else {
-                getSchoolPaperInfos2(type, time, filePaths, typeFilePath);
+                getSchoolPaperInfos(type, time, filePaths, typeFilePath);
             }
             redisRepository.delByPattern("paper_*");
         } finally {
@@ -154,7 +154,7 @@ public class PaperExcelServiceImpl implements PaperExcelService {
         return paperModels;
     }
 
-    private void getSchoolPaperInfos2(Integer type, Time time, List<String> filePaths, String typeFilePath) {
+    private void getSchoolPaperInfos(Integer type, Time time, List<String> filePaths, String typeFilePath) {
         //excel文件的路径
         String excelFilePath = null;
         //找到excel文件的路径
@@ -173,10 +173,12 @@ public class PaperExcelServiceImpl implements PaperExcelService {
                 }
             }
         }
+        System.out.println("1");
         //如果为null说明没有找到
         if (excelFilePath == null) {
             throw new ExcelException("没有找到excel文件");
         }
+        System.out.println("2");
         //创建类别名称为key的hash表
         Map<String, Category> categoryMap = categoryRepository.findAll().stream()
                 .collect(Collectors.toMap(Category::getCategoryName, category -> category));
@@ -193,8 +195,10 @@ public class PaperExcelServiceImpl implements PaperExcelService {
                 imageFilePathMap.put(Integer.parseInt(number), imageFilePath);
             }
         }
+        System.out.println("3");
         //读取excel中文件信息，因为是list所以不用担心顺序问题
         List<PaperExcelModel> paperExcelModels = getPaperExcelModelByFilePath(typeFilePath + excelFilePath);
+        System.out.println("4");
         int size = paperExcelModels.size();
         //循环，excel为顺序读，并存到list中，说明此时的顺序和excel中顺序相同，可以直接利用这个特性，找到文件夹中文件
         for (int i = 0; i < size; i++) {
@@ -254,6 +258,7 @@ public class PaperExcelServiceImpl implements PaperExcelService {
             paper.setCountries(model.getCountries());
             paper.setPaperType(changePaperType(type, ttPaper.getPaperType()));
             paper.setArticleName(model.getArticleName());
+            paper.setAddresses(model.getAddress());
         }
         return paper;
     }

@@ -73,4 +73,6 @@ public interface PaperRepository extends JpaRepository<Paper, Long> {
 
     @Query(value = "SELECT * FROM paper_info WHERE MATCH (article_name)AGAINST(?1)", nativeQuery = true)
     List<Paper> findAllByKeyWord(String keyWord);
+
+    List<Paper> findAllByPaperIdIn(List<Long> paperIdList);
 }

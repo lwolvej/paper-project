@@ -7,11 +7,23 @@ import org.duohuo.paper.exceptions.ZipFileException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipOutputStream;
 
 public final class FileUtil {
 
     private FileUtil() {
 
+    }
+
+    public static byte[] createZipWithOutPutStreams(Map<String, byte[]> fileMap) {
+        ZipOutputStream zipOutputStream;
+        for (Map.Entry<String, byte[]> file : fileMap.entrySet()) {
+            InputStream inputStream = new ByteArrayInputStream(file.getValue());
+
+        }
+
+        return null;
     }
 
     //删除临时文件

@@ -1,11 +1,14 @@
 package org.duohuo.paper.service;
 
+import org.duohuo.paper.model.Paper;
 import org.duohuo.paper.model.result.JsonResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface PaperSearchService extends SearchService {
+
+    List<Paper> getPaperListById(List<Long> ids);
 
     JsonResult searchByAccessionNumber(Integer pageNum, Boolean ifDesc, String AccessionNumber);
 

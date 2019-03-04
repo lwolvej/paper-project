@@ -1,10 +1,13 @@
 package org.duohuo.paper.service.impl.help;
 
+import org.duohuo.paper.model.Paper;
 import org.duohuo.paper.model.result.JsonResult;
 
 import java.util.List;
 
 public interface PaperSearchServiceHelper {
+
+    List<Paper> getPaperListById(List<Long> ids);
 
     JsonResult searchByCategoryAndPaperType(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, Integer type);
 

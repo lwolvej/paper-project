@@ -1,24 +1,58 @@
 package org.duohuo.paper.utils;
 
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.metadata.BaseRowModel;
 import com.alibaba.excel.metadata.Font;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.TableStyle;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.duohuo.paper.excel.model.download.JournalDownloadModel;
+import org.duohuo.paper.excel.model.download.PaperExcelDownloadModel;
+import org.duohuo.paper.exceptions.ExcelException;
+import org.springframework.boot.system.ApplicationHome;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.net.URL;
-import java.net.URLDecoder;
+import java.io.IOException;
+import java.util.List;
 
 
 public final class ExcelUtil {
 
+    //type=1为paper，type=2为journal
+    public static byte[] getDownByte(List<BaseRowModel> data, int type) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ExcelWriter excelWriter = new ExcelWriter(outputStream, ExcelTypeEnum.XLSX, true);
+        if (type == 1) {
+            excelWriter.write(data, ExcelUtil.createPaperSheet());
+        } else {
+            excelWriter.write(data, ExcelUtil.createJournalSheet());
+        }
+        excelWriter.finish();
+        byte[] bytes = outputStream.toByteArray();
+        try {
+            outputStream.close();
+            return bytes;
+        } catch (IOException e) {
+            throw new ExcelException(e.getMessage());
+        }
+    }
+
     public static String getJarPath() {
-        String path = System.getProperty("java.class.path");
+        String path = new ApplicationHome(ExcelUtil.class).getSource().getAbsolutePath();
         return path.substring(
                 path.lastIndexOf(System.getProperty("path.separator")) + 1,
                 path.lastIndexOf(File.separator) + 1
         );
+    }
+
+    public static Sheet createPaperSheet() {
+        Sheet sheet = new Sheet(1, 11, PaperExcelDownloadModel.class);
+        sheet.setSheetName("sheet1");
+        sheet.setTableStyle(createJournalTableStyle());
+        sheet.setAutoWidth(true);
+        return sheet;
     }
 
     public static Sheet createJournalSheet() {

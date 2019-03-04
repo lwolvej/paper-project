@@ -85,12 +85,13 @@ CREATE TABLE `paper_info`
 
 CREATE TABLE `school_paper_image_info`
 (
-  `image_id`   INT        NOT NULL,
+  `image_id`   INT        NOT NULL AUTO_INCREMENT,
   `image_name` TEXT       NOT NULL,
   `image_data` MEDIUMBLOB NOT NULL,
   `paper_id`   BIGINT     NOT NULL,
   KEY `paper_id_index` (`paper_id`),
-  FOREIGN KEY (`paper_id`) REFERENCES `paper_info` (`paper_id`)
+  FOREIGN KEY (`paper_id`) REFERENCES `paper_info` (`paper_id`),
+  PRIMARY KEY (`image_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
