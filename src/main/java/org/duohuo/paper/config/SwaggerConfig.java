@@ -26,7 +26,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("图书馆项目")
                 .description("项目接口")
-                .version("0.3.7")
+                .version("0.4.0")
                 .contact(new Contact("", "", ""))
                 .build();
     }

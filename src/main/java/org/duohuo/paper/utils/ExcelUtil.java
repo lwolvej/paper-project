@@ -7,6 +7,7 @@ import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.TableStyle;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.duohuo.paper.excel.model.download.IncitesDownloadExcelModel;
 import org.duohuo.paper.excel.model.download.JournalDownloadModel;
 import org.duohuo.paper.excel.model.download.PaperExcelDownloadModel;
 import org.duohuo.paper.exceptions.ExcelException;
@@ -26,8 +27,10 @@ public final class ExcelUtil {
         ExcelWriter excelWriter = new ExcelWriter(outputStream, ExcelTypeEnum.XLSX, true);
         if (type == 1) {
             excelWriter.write(data, ExcelUtil.createPaperSheet());
-        } else {
+        } else if (type == 2) {
             excelWriter.write(data, ExcelUtil.createJournalSheet());
+        } else {
+            excelWriter.write(data, ExcelUtil.createIncitesSheet());
         }
         excelWriter.finish();
         byte[] bytes = outputStream.toByteArray();
@@ -47,10 +50,18 @@ public final class ExcelUtil {
         );
     }
 
+    public static Sheet createIncitesSheet() {
+        Sheet sheet = new Sheet(1, 19, IncitesDownloadExcelModel.class);
+        sheet.setSheetName("sheet1");
+        sheet.setTableStyle(createTableStyle());
+        sheet.setAutoWidth(true);
+        return sheet;
+    }
+
     public static Sheet createPaperSheet() {
         Sheet sheet = new Sheet(1, 11, PaperExcelDownloadModel.class);
         sheet.setSheetName("sheet1");
-        sheet.setTableStyle(createJournalTableStyle());
+        sheet.setTableStyle(createTableStyle());
         sheet.setAutoWidth(true);
         return sheet;
     }
@@ -58,12 +69,12 @@ public final class ExcelUtil {
     public static Sheet createJournalSheet() {
         Sheet sheet = new Sheet(1, 7, JournalDownloadModel.class);
         sheet.setSheetName("sheet1");
-        sheet.setTableStyle(createJournalTableStyle());
+        sheet.setTableStyle(createTableStyle());
         sheet.setAutoWidth(true);
         return sheet;
     }
 
-    private static TableStyle createJournalTableStyle() {
+    private static TableStyle createTableStyle() {
         TableStyle tableStyle = new TableStyle();
         Font headFont = new Font();
         headFont.setBold(false);

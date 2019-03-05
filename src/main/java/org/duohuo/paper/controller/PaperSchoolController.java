@@ -1,9 +1,6 @@
 package org.duohuo.paper.controller;
 
-import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.BaseRowModel;
-import com.alibaba.excel.support.ExcelTypeEnum;
-import com.sun.deploy.net.HttpResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -12,10 +9,8 @@ import net.lingala.zip4j.model.ZipParameters;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.aspectj.weaver.ast.Not;
 import org.duohuo.paper.excel.model.download.PaperExcelDownloadModel;
 import org.duohuo.paper.exceptions.NotFoundException;
-import org.duohuo.paper.model.Paper;
 import org.duohuo.paper.model.SchoolPaperImage;
 import org.duohuo.paper.model.dto.DeleteDto;
 import org.duohuo.paper.model.dto.DownloadDto;
@@ -29,12 +24,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;

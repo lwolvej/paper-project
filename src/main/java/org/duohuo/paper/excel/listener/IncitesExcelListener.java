@@ -2,19 +2,41 @@ package org.duohuo.paper.excel.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
+import org.duohuo.paper.excel.model.IncitesExcelModel;
+import org.duohuo.paper.utils.ValidationUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Vector;
 
 /**
  * @author lwolvej
  */
-public class IncitesExcelListener extends AnalysisEventListener<IncitesExcelListener> {
+public class IncitesExcelListener extends AnalysisEventListener<IncitesExcelModel> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(IncitesExcelListener.class);
+
+    private Vector<IncitesExcelModel> vector = new Vector<>();
 
     @Override
-    public void invoke(IncitesExcelListener incitesExcelListener, AnalysisContext analysisContext) {
-
+    public void invoke(IncitesExcelModel incitesExcelModel, AnalysisContext analysisContext) {
+        if (ValidationUtil.validation(incitesExcelModel)) {
+            vector.add(incitesExcelModel);
+        } else {
+            LOGGER.info("插入: {} 失败!", incitesExcelModel);
+        }
     }
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
 
+    }
+
+    public Vector<IncitesExcelModel> getVector() {
+        return vector;
+    }
+
+    public void setVector(Vector<IncitesExcelModel> vector) {
+        this.vector = vector;
     }
 }

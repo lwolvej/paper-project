@@ -1,81 +1,73 @@
-package org.duohuo.paper.excel.model;
+package org.duohuo.paper.excel.model.download;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
-import org.duohuo.paper.model.Category;
-import org.duohuo.paper.model.Incites;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * @author lwolvej
- */
-public class IncitesExcelModel extends BaseRowModel implements Serializable {
+public class IncitesDownloadExcelModel extends BaseRowModel implements Serializable {
 
-    private static final long serialVersionUID = -5413609546076671792L;
+    private static final long serialVersionUID = -8322970178849489286L;
 
-    @ExcelProperty(index = 0)
+    @ExcelProperty(index = 0, value = "索取号")
     private String accessionNumber;
 
-    @ExcelProperty(index = 1)
+    @ExcelProperty(index = 1, value = "DOI")
     private String doi;
 
-    //这里修改
-    @ExcelProperty(index = 2)
+    @ExcelProperty(index = 2, value = "Pubmed ID")
     private String pmid;
 
-    @ExcelProperty(index = 3)
+    @ExcelProperty(index = 3, value = "论文标题")
     private String articleName;
 
-    @ExcelProperty(index = 4)
+    @ExcelProperty(index = 4, value = "链接")
     private String link;
 
-    @ExcelProperty(index = 5)
+    @ExcelProperty(index = 5, value = "作者")
     private String authors;
 
-    @ExcelProperty(index = 6)
+    @ExcelProperty(index = 6, value = "来源")
     private String sources;
 
-    //这里修改
-    @ExcelProperty(index = 7)
-    private String researchField;
-
-    @ExcelProperty(index = 8)
+    @ExcelProperty(index = 8, value = "卷")
     private String volume;
 
-    @ExcelProperty(index = 9)
+    @ExcelProperty(index = 9, value = "期")
     private String period;
 
-    @ExcelProperty(index = 10)
+    @ExcelProperty(index = 10, value = "页")
     private String page;
 
-    //    这里修改
-    @ExcelProperty(index = 11)
+    @ExcelProperty(index = 11, value = "出版年")
     private Integer publicationDate;
 
-    @ExcelProperty(index = 12)
-    private Integer citedTimes;
-
-    @ExcelProperty(index = 13)
+    @ExcelProperty(index = 12, value = "期刊预期被引频次")
     private Double journalExpectCitedTimes;
 
-    @ExcelProperty(index = 14)
+    @ExcelProperty(index = 13, value = "类别预期被引频次")
     private Double subjectExpectCitedTimes;
 
-    @ExcelProperty(index = 15)
+    @ExcelProperty(index = 14, value = "期刊规范化的引文影响力")
     private Double journalInfluence;
 
-    @ExcelProperty(index = 16)
+    @ExcelProperty(index = 15, value = "学科规范化的引文影响力")
     private Double subjectInfluence;
 
-    @ExcelProperty(index = 17)
+    @ExcelProperty(index = 16, value = "学科领域百分位")
     private Double subjectAreaPercentile;
 
-    @ExcelProperty(index = 18)
+    @ExcelProperty(index = 17, value = "期刊影响因子")
     private String journalImpactFactor;
 
-    public IncitesExcelModel() {
+    @ExcelProperty(index = 7, value = "学科领域")
+    private String categoryName;
+
+    @ExcelProperty(index = 18, value = "卷")
+    private String value;
+
+    public IncitesDownloadExcelModel() {
     }
 
     public String getAccessionNumber() {
@@ -92,6 +84,14 @@ public class IncitesExcelModel extends BaseRowModel implements Serializable {
 
     public void setDoi(String doi) {
         this.doi = doi;
+    }
+
+    public String getPmid() {
+        return pmid;
+    }
+
+    public void setPmid(String pmid) {
+        this.pmid = pmid;
     }
 
     public String getArticleName() {
@@ -150,12 +150,12 @@ public class IncitesExcelModel extends BaseRowModel implements Serializable {
         this.page = page;
     }
 
-    public Integer getCitedTimes() {
-        return citedTimes;
+    public Integer getPublicationDate() {
+        return publicationDate;
     }
 
-    public void setCitedTimes(Integer citedTimes) {
-        this.citedTimes = citedTimes;
+    public void setPublicationDate(Integer publicationDate) {
+        this.publicationDate = publicationDate;
     }
 
     public Double getJournalExpectCitedTimes() {
@@ -206,35 +206,27 @@ public class IncitesExcelModel extends BaseRowModel implements Serializable {
         this.journalImpactFactor = journalImpactFactor;
     }
 
-    public String getPmid() {
-        return pmid;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setPmid(String pmid) {
-        this.pmid = pmid;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public String getResearchField() {
-        return researchField;
+    public String getValue() {
+        return value;
     }
 
-    public void setResearchField(String researchField) {
-        this.researchField = researchField;
-    }
-
-    public Integer getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Integer publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        IncitesExcelModel that = (IncitesExcelModel) o;
+        IncitesDownloadExcelModel that = (IncitesDownloadExcelModel) o;
         return Objects.equals(accessionNumber, that.accessionNumber) &&
                 Objects.equals(doi, that.doi) &&
                 Objects.equals(pmid, that.pmid) &&
@@ -242,28 +234,28 @@ public class IncitesExcelModel extends BaseRowModel implements Serializable {
                 Objects.equals(link, that.link) &&
                 Objects.equals(authors, that.authors) &&
                 Objects.equals(sources, that.sources) &&
-                Objects.equals(researchField, that.researchField) &&
                 Objects.equals(volume, that.volume) &&
                 Objects.equals(period, that.period) &&
                 Objects.equals(page, that.page) &&
                 Objects.equals(publicationDate, that.publicationDate) &&
-                Objects.equals(citedTimes, that.citedTimes) &&
                 Objects.equals(journalExpectCitedTimes, that.journalExpectCitedTimes) &&
                 Objects.equals(subjectExpectCitedTimes, that.subjectExpectCitedTimes) &&
                 Objects.equals(journalInfluence, that.journalInfluence) &&
                 Objects.equals(subjectInfluence, that.subjectInfluence) &&
                 Objects.equals(subjectAreaPercentile, that.subjectAreaPercentile) &&
-                Objects.equals(journalImpactFactor, that.journalImpactFactor);
+                Objects.equals(journalImpactFactor, that.journalImpactFactor) &&
+                Objects.equals(categoryName, that.categoryName) &&
+                Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessionNumber, doi, pmid, articleName, link, authors, sources, researchField, volume, period, page, publicationDate, citedTimes, journalExpectCitedTimes, subjectExpectCitedTimes, journalInfluence, subjectInfluence, subjectAreaPercentile, journalImpactFactor);
+        return Objects.hash(accessionNumber, doi, pmid, articleName, link, authors, sources, volume, period, page, publicationDate, journalExpectCitedTimes, subjectExpectCitedTimes, journalInfluence, subjectInfluence, subjectAreaPercentile, journalImpactFactor, categoryName, value);
     }
 
     @Override
     public String toString() {
-        return "IncitesExcelModel{" +
+        return "IncitesDownloadExcelModel{" +
                 "accessionNumber='" + accessionNumber + '\'' +
                 ", doi='" + doi + '\'' +
                 ", pmid='" + pmid + '\'' +
@@ -271,41 +263,18 @@ public class IncitesExcelModel extends BaseRowModel implements Serializable {
                 ", link='" + link + '\'' +
                 ", authors='" + authors + '\'' +
                 ", sources='" + sources + '\'' +
-                ", researchField='" + researchField + '\'' +
                 ", volume='" + volume + '\'' +
                 ", period='" + period + '\'' +
                 ", page='" + page + '\'' +
                 ", publicationDate=" + publicationDate +
-                ", citedTimes=" + citedTimes +
                 ", journalExpectCitedTimes=" + journalExpectCitedTimes +
                 ", subjectExpectCitedTimes=" + subjectExpectCitedTimes +
                 ", journalInfluence=" + journalInfluence +
                 ", subjectInfluence=" + subjectInfluence +
                 ", subjectAreaPercentile=" + subjectAreaPercentile +
                 ", journalImpactFactor='" + journalImpactFactor + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", value='" + value + '\'' +
                 '}';
-    }
-
-    public Incites convertToIncites(Category category) {
-        Incites incites = new Incites();
-        incites.setAccessionNumber(this.getAccessionNumber());
-        incites.setArticleName(this.getArticleName());
-        incites.setAuthors(this.getAuthors());
-        incites.setCategory(category);
-        incites.setCitedTimes(this.getCitedTimes());
-        incites.setDoi(this.getDoi());
-        incites.setJournalExpectCitedTimes(this.getJournalExpectCitedTimes());
-        incites.setJournalImpactFactor(this.getJournalImpactFactor());
-        incites.setJournalInfluence(this.getJournalInfluence());
-        incites.setLink(this.getLink());
-        incites.setPage(this.getPage());
-        incites.setPeriod(this.getPeriod());
-        incites.setPmid(this.getPmid());
-        incites.setPublicationDate(this.getPublicationDate());
-        incites.setSources(this.getSources());
-        incites.setSubjectAreaPercentile(this.getSubjectAreaPercentile());
-        incites.setSubjectExpectCitedTimes(this.getSubjectExpectCitedTimes());
-        incites.setVolume(this.getVolume());
-        return incites;
     }
 }

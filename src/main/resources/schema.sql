@@ -116,10 +116,42 @@ CREATE TABLE `base_line_info`
   `category_id`  INT         NOT NULL COMMENT '类别id',
   PRIMARY KEY (`base_line_id`),
   KEY `year_id_index` (`year`),
+  KEY `percent_index` (`percent`),
   KEY `category_id_index` (`category_id`),
   FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT = '基准线信息表';
+
+CREATE TABLE `incites_info`
+(
+  `incites_id`                 INT          NOT NULL AUTO_INCREMENT,
+  `accession_number`           CHAR(20)     NOT NULL,
+  `doi`                        VARCHAR(64)  NOT NULL,
+  `pmid`                       VARCHAR(64)  NOT NULL,
+  `article_name`               TEXT         NOT NULL,
+  `link`                       TEXT         NOT NULL,
+  `authors`                    TEXT         NOT NULL,
+  `sources`                    VARCHAR(256) NOT NULL,
+  `volume`                     VARCHAR(8)   NOT NULL,
+  `period`                     VARCHAR(8)   NOT NULL,
+  `page`                       VARCHAR(16)  NOT NULL,
+  `publication_date`           INT          NOT NULL,
+  `cited_times`                INT          NOT NULL,
+  `journal_expect_cited_times` DOUBLE       NOT NULL,
+  `subject_expect_cited_times` DOUBLE       NOT NULL,
+  `journal_influence`          DOUBLE       NOT NULL,
+  `subject_influence`          DOUBLE       NOT NULL,
+  `subject_area_percentile`    DOUBLE       NOT NULL,
+  `journal_impact_factor`      VARCHAR(8)   NOT NULL,
+  `category_id`                INT          NOT NULL,
+  PRIMARY KEY (`incites_id`),
+  KEY `accession_number_index` (`accession_number`),
+  KEY `doi_index` (`doi`),
+  KEY `category_id_index` (`category_id`),
+  FULLTEXT KEY `article_name_full_text_index` (`article_name`),
+  FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 COMMENT = '被引频次';
 
 INSERT INTO `user_info`
 VALUES ('admin', 'admin', 'admin', 'edit');

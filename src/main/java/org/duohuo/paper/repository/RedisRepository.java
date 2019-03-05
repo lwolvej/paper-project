@@ -19,7 +19,7 @@ public class RedisRepository {
     /**
      * 设置一个key的过期时间
      *
-     * @param key  key
+     * @param key  constants
      * @param time 过期时间
      * @return 是否操作成功
      */
@@ -35,12 +35,12 @@ public class RedisRepository {
     /**
      * 插入一个值
      *
-     * @param key   key
+     * @param key   constants
      * @param value 值
      * @param time  时间（秒）
      */
     public void set(String key, Object value, Long time) {
-//        if (!redisTemplate.hasKey(key)) {
+//        if (!redisTemplate.hasKey(constants)) {
         redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
 //        }
     }
@@ -52,7 +52,7 @@ public class RedisRepository {
     /**
      * 删除一个key
      *
-     * @param key key
+     * @param key constants
      */
     @SuppressWarnings("ConstantConditions")
     public void del(String key) {
@@ -71,7 +71,7 @@ public class RedisRepository {
     /**
      * 根据key获取值
      *
-     * @param key key
+     * @param key constants
      * @return value
      */
     public Object get(String key) {

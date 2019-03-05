@@ -6,9 +6,11 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.duohuo.paper.Constants;
 import org.duohuo.paper.exceptions.CustomException;
+import org.duohuo.paper.exceptions.ExcelException;
 import org.duohuo.paper.exceptions.NotFoundException;
 import org.duohuo.paper.model.result.JsonResult;
 import org.duohuo.paper.service.BaseLineService;
+import org.duohuo.paper.service.IncitesService;
 import org.duohuo.paper.service.JournalExcelService;
 import org.duohuo.paper.service.PaperExcelService;
 import org.duohuo.paper.utils.ExcelUtil;
@@ -22,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.IOException;
 
 @Api(description = "文件上传接口", value = "文件上传")
 @RequestMapping("/upload")
@@ -36,6 +39,23 @@ public class UploadController {
 
     @Resource(name = "paperExcelServiceImpl")
     private PaperExcelService paperExcelService;
+
+    @Resource(name = "incitesServiceImpl")
+    private IncitesService incitesServiceImpl;
+
+    @ApiOperation(value = "被引频次上传", notes = "被引频次上传，上传一个excel")
+    @PostMapping(value = "/incites")
+    @RequiresPermissions(logical = Logical.AND, value = {"edit"})
+    public JsonResult uploadIncitesExcel(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file == null) {
+            throw new NotFoundException("没有上传所需文件");
+        }
+        String fileName = file.getOriginalFilename();
+        if (RegexUtil.excelFileValidation(fileName)) {
+            throw new ExcelException("没有上传指定格式文件");
+        }
+        return incitesServiceImpl.insertIncitesDate(file.getBytes(), fileName);
+    }
 
     @ApiOperation(value = "esi论文热点论文上传", notes = "esi热点论文上传，上传一个zip压缩包")
     @PostMapping(value = "/paper/esi/hot")
@@ -81,7 +101,7 @@ public class UploadController {
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
     public JsonResult uploadSchoolPaperHighlyZip(@RequestParam("file") MultipartFile file,
                                                  @RequestParam("year") Integer year,
-                                                 @RequestParam("month") Integer month) throws Exception {
+                                                 @RequestParam("month") Integer month) throws IOException {
         paperValidation(file, year, month);
         String jarPath = ExcelUtil.getJarPath();
         String resultPath = jarPath + File.separator + Constants.TEMP_FILE_SCHOOL_HIGHLY_PAPER;

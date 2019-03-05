@@ -491,7 +491,7 @@ public class ApplicationTests {
     @Test
     public void baseLineTest1() {
         List<Object> objects = null;
-        try (InputStream inputStream = new FileInputStream("/Users/lwolvej/IdeaProjects/paper/src/main/resources/BaselinePercentiles 201801.xlsx")) {
+        try (InputStream inputStream = new FileInputStream("/Users/lwolvej/Desktop/BaselinePercentiles.xlsx")) {
             AnalysisEventListener listener = new BaseLineExcelListener();
             ExcelReader reader = new ExcelReader(inputStream, ExcelTypeEnum.XLSX, null, listener);
             reader.read();
@@ -737,7 +737,7 @@ public class ApplicationTests {
     public void zipFile2() throws Exception {
         ZipOutputStream outputStream = new ZipOutputStream(new FileOutputStream("/Users/lwolvej/Desktop/test2.zip"));
         List<SchoolPaperImage> schoolPaperImages = schoolPaperImageRepository.findAll();
-        for (SchoolPaperImage image: schoolPaperImages) {
+        for (SchoolPaperImage image : schoolPaperImages) {
             ZipParameters zipParameters = new ZipParameters();
             zipParameters.setSourceExternalStream(true);
             zipParameters.setFileNameInZip(image.getImageName());
@@ -747,5 +747,10 @@ public class ApplicationTests {
         }
         outputStream.finish();
 
+    }
+
+    @Test
+    public void baseLineTest4() {
+        System.out.println(baseLineRepository.findByCategory_CategoryIdAndPercentAndYear(1004, "1.00%"));
     }
 }
