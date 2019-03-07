@@ -16,7 +16,7 @@ public class SchoolPaperImageManager {
     @Resource(name = "schoolPaperImageRepository")
     private SchoolPaperImageRepository schoolPaperImageRepository;
 
-    public List<SchoolPaperImage> findAllByPaperId(final List<Long> paperIdList) {
+    public List<SchoolPaperImage> findAllByPaperIdList(final List<Long> paperIdList) {
         List<Long> newPaperIdList = paperIdList.stream().distinct().collect(Collectors.toList());
         List<SchoolPaperImage> imageList = schoolPaperImageRepository.findAllByPaperIdIn(newPaperIdList);
         if (!ObjectUtil.ifNotNullCollection(imageList)) {

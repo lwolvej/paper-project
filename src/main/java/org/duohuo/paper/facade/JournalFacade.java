@@ -12,6 +12,7 @@ import org.duohuo.paper.utils.DownloadUtil;
 import org.duohuo.paper.utils.ExcelUtil;
 import org.duohuo.paper.utils.ObjectUtil;
 import org.duohuo.paper.utils.RegexUtil;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,16 +32,19 @@ public class JournalFacade {
     @Resource(name = "journalExcelServiceImpl")
     private JournalExcelService journalExcelService;
 
+
     public JsonResult searchFellOutFacade(final SearchDto2 searchDto2) {
         validation(searchDto2);
         return journalSearchService.getFellOut(searchDto2.getPageNum(), searchDto2.getIfDesc(), searchDto2.getKeyWord(), searchDto2.getSubject());
     }
 
+    @Cacheable(value = "journal_facade_search_new_addition", keyGenerator = "redisKeyGenerator")
     public JsonResult searchNewAdditionFacade(final SearchDto2 searchDto2) {
         validation(searchDto2);
         return journalSearchService.getNewAddition(searchDto2.getPageNum(), searchDto2.getIfDesc(), searchDto2.getKeyWord(), searchDto2.getSubject());
     }
 
+    @Cacheable(value = "journal_facade_search_current", keyGenerator = "redisKeyGenerator")
     public JsonResult currentFacade(final SearchDto2 searchDto2) {
         validation(searchDto2);
         return journalSearchService.getCurrent(searchDto2.getPageNum(), searchDto2.getIfDesc(), searchDto2.getKeyWord(), searchDto2.getSubject());
@@ -99,6 +103,7 @@ public class JournalFacade {
         return DownloadUtil.getResponseEntity(fileName, bytes);
     }
 
+    @Cacheable(value = "journal_facade_search_all", keyGenerator = "redisKeyGenerator")
     public JsonResult esiSearchFacade(final SearchDto searchDto) {
         /*
         通过传输来的数据进行判断

@@ -72,6 +72,13 @@ public class RedisRepository {
         }
     }
 
+    public void delByRandom() {
+        String key = redisTemplate.randomKey();
+        if (key != null) {
+            redisTemplate.delete(key);
+        }
+    }
+
     /**
      * 根据key获取值
      *

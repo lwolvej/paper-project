@@ -1,6 +1,6 @@
 package org.duohuo.paper.manager;
 
-import org.duohuo.paper.Constants;
+import org.duohuo.paper.constants.PageConstant;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
@@ -23,6 +23,6 @@ public class PageManager {
                 sort = Sort.by(Sort.Order.asc(sortBy[0]));
             }
         }
-        return PageRequest.of(pageNum, Constants.PAGE_SIZE, sort);
+        return PageRequest.of(pageNum, PageConstant.PAGE_SIZE, sort);
     }
 }

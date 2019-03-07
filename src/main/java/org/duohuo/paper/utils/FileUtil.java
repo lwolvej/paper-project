@@ -2,14 +2,12 @@ package org.duohuo.paper.utils;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.model.FileHeader;
-import org.duohuo.paper.Constants;
 import org.duohuo.paper.exceptions.ZipFileException;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.zip.ZipOutputStream;
 
 public final class FileUtil {
@@ -18,26 +16,26 @@ public final class FileUtil {
 
     }
 
-    public static String getTypeFilePath(Integer type) {
-        String path = ExcelUtil.getJarPath() + File.separator;
-        switch (type) {
-            case 1:
-                path = path.concat(Constants.TEMP_FILE_ESI_HIGHLY_PAPER);
-                break;
-            case 2:
-                path = path.concat(Constants.TEMP_FILE_ESI_HOT_PAPER);
-                break;
-            case 3:
-                path = path.concat(Constants.TEMP_FILE_SCHOOL_HIGHLY_PAPER);
-                break;
-            case 4:
-                path = path.concat(Constants.TEMP_FILE_SCHOOL_HOT_PAPER);
-                break;
-            default:
-                throw new RuntimeException();
-        }
-        return path.concat(System.currentTimeMillis() + File.separator);
-    }
+//    public static String getTypeFilePath(Integer type) {
+//        String path = ExcelUtil.getJarPath() + File.separator;
+//        switch (type) {
+//            case 1:
+//                path = path.concat(Constants.TEMP_FILE_ESI_HIGHLY_PAPER);
+//                break;
+//            case 2:
+//                path = path.concat(Constants.TEMP_FILE_ESI_HOT_PAPER);
+//                break;
+//            case 3:
+//                path = path.concat(Constants.TEMP_FILE_SCHOOL_HIGHLY_PAPER);
+//                break;
+//            case 4:
+//                path = path.concat(Constants.TEMP_FILE_SCHOOL_HOT_PAPER);
+//                break;
+//            default:
+//                throw new RuntimeException();
+//        }
+//        return path.concat(System.currentTimeMillis() + File.separator);
+//    }
 
 
     public static byte[] createZipWithOutPutStreams(Map<String, byte[]> fileMap) {
@@ -48,6 +46,13 @@ public final class FileUtil {
         }
 
         return null;
+    }
+
+    public static void fileDelete(final String filePath) {
+        File file = new File(filePath);
+        if (file.isDirectory()) {
+            fileDelete(file);
+        }
     }
 
     //删除临时文件

@@ -1,7 +1,6 @@
 package org.duohuo.paper.service.impl;
 
 import org.duohuo.paper.convert.JournalConverter;
-import org.duohuo.paper.exceptions.NotFoundException;
 import org.duohuo.paper.manager.CategoryManager;
 import org.duohuo.paper.manager.JournalManager;
 import org.duohuo.paper.manager.PageManager;

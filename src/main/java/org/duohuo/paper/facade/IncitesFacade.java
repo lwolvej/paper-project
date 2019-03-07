@@ -13,6 +13,7 @@ import org.duohuo.paper.utils.DownloadUtil;
 import org.duohuo.paper.utils.ExcelUtil;
 import org.duohuo.paper.utils.ObjectUtil;
 import org.duohuo.paper.utils.RegexUtil;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -61,6 +62,7 @@ public class IncitesFacade {
         return incitesExcelService.insertIncitesData(data, fileName);
     }
 
+    @Cacheable(value = "incites_facade_search_all", keyGenerator = "redisKeyGenerator")
     public JsonResult searchFacade(final SearchDto searchDto) {
         if (searchDto == null) {
             throw new NotFoundException("被引频次检索信息为空!");

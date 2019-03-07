@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import org.duohuo.paper.Constants;
+import org.duohuo.paper.constants.TimeConstant;
 
 import java.util.Date;
 
@@ -58,7 +58,7 @@ public final class JwtUtil {
      */
     public static String sign(String username, String secret) {
         try {
-            Date date = new Date(System.currentTimeMillis() + Constants.CAPTCHA_EXPIRE_TIME);
+            Date date = new Date(System.currentTimeMillis() + TimeConstant.CAPTCHA_EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(secret);
             // 附带username信息
             return JWT.create()

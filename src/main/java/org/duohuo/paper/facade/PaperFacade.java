@@ -16,6 +16,7 @@ import org.duohuo.paper.service.PaperExcelService;
 import org.duohuo.paper.service.PaperSearchService;
 import org.duohuo.paper.service.SchoolPaperImageService;
 import org.duohuo.paper.utils.*;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -110,7 +111,7 @@ public class PaperFacade {
                 .collect(Collectors.toList());
     }
 
-
+    @Cacheable(value = "paper_facade_search_all", keyGenerator = "redisKeyGenerator")
     public JsonResult paperSearchFacade(final SearchDto searchDto, final Integer type) {
         if (searchDto == null) {
             throw new NotFoundException("论文检索条件为空");

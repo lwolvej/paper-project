@@ -26,17 +26,17 @@ public class BaseLineManager {
         }
     }
 
-    @Cacheable(value = "baseLine_find_category_and_percent_and_year", keyGenerator = "redisKeyGenerator")
+    @Cacheable(value = "base_line_find_category_and_percent_and_year", keyGenerator = "redisKeyGenerator")
     public BaseLine findByCategoryAndPercentAndYear(final Category category) {
         return baseLineRepository.findByCategory_CategoryIdAndPercentAndYear(category.getCategoryId(), "1.00%");
     }
 
-    @Cacheable(value = "baseLine_find_category_list", keyGenerator = "redisKeyGenerator")
+    @Cacheable(value = "base_line_find_category_list", keyGenerator = "redisKeyGenerator")
     public List<BaseLine> findAllByCategoryList(final List<Integer> categoryList) {
         return baseLineRepository.findAllByCategory_CategoryIdIn(categoryList);
     }
 
-    @Cacheable(value = "baseLine_find_all_year", keyGenerator = "redisKeyGenerator")
+    @Cacheable(value = "base_line_find_all_year", keyGenerator = "redisKeyGenerator")
     public List<BaseLine> findAllByYear() {
         return baseLineRepository.findAllByYear("ALL YEARS");
     }
