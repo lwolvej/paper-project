@@ -16,6 +16,6 @@ public final class TimeUtil {
         } else {
             monthStr = Integer.toString(month);
         }
-        return (yearStr + monthStr).hashCode();
+        return (yearStr.concat(monthStr)).hashCode();
     }
 }

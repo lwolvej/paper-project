@@ -2,8 +2,6 @@ package org.duohuo.paper.excel.model;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
-import org.duohuo.paper.model.Category;
-import org.duohuo.paper.model.Incites;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -284,28 +282,5 @@ public class IncitesExcelModel extends BaseRowModel implements Serializable {
                 ", subjectAreaPercentile=" + subjectAreaPercentile +
                 ", journalImpactFactor='" + journalImpactFactor + '\'' +
                 '}';
-    }
-
-    public Incites convertToIncites(Category category) {
-        Incites incites = new Incites();
-        incites.setAccessionNumber(this.getAccessionNumber());
-        incites.setArticleName(this.getArticleName());
-        incites.setAuthors(this.getAuthors());
-        incites.setCategory(category);
-        incites.setCitedTimes(this.getCitedTimes());
-        incites.setDoi(this.getDoi());
-        incites.setJournalExpectCitedTimes(this.getJournalExpectCitedTimes());
-        incites.setJournalImpactFactor(this.getJournalImpactFactor());
-        incites.setJournalInfluence(this.getJournalInfluence());
-        incites.setLink(this.getLink());
-        incites.setPage(this.getPage());
-        incites.setPeriod(this.getPeriod());
-        incites.setPmid(this.getPmid());
-        incites.setPublicationDate(this.getPublicationDate());
-        incites.setSources(this.getSources());
-        incites.setSubjectAreaPercentile(this.getSubjectAreaPercentile());
-        incites.setSubjectExpectCitedTimes(this.getSubjectExpectCitedTimes());
-        incites.setVolume(this.getVolume());
-        return incites;
     }
 }

@@ -4,10 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.duohuo.paper.exceptions.UserException;
+import org.duohuo.paper.facade.UserFacade;
 import org.duohuo.paper.model.dto.UserDto;
 import org.duohuo.paper.model.result.JsonResult;
-import org.duohuo.paper.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,15 +20,14 @@ import javax.annotation.Resource;
 @RequestMapping("/user")
 public class UserController {
 
-    @Resource(name = "userServiceImpl")
-    private UserService userService;
+    @Resource(name = "userFacade")
+    private UserFacade userFacade;
 
     @ApiOperation(value = "用户登录")
     @PostMapping("/login")
     @ResponseBody
     public JsonResult login(@ApiParam(name = "用户实体") @RequestBody UserDto userDto) {
-        validation(userDto);
-        return userService.login(userDto.getUserName(), userDto.getPassword(), userDto.getUuid(), userDto.getCode());
+        return userFacade.loginFacade(userDto);
     }
 
     @ApiOperation(value = "用户注册")
@@ -37,8 +35,7 @@ public class UserController {
     @ResponseBody
     @RequiresRoles("admin")
     public JsonResult register(@ApiParam(name = "用户实体") @RequestBody UserDto userDto) {
-        validation(userDto);
-        return userService.register(userDto.getUserName(), userDto.getPassword(), userDto.getUuid(), userDto.getCode());
+        return userFacade.registerFacade(userDto);
     }
 
     @ApiOperation(value = "后台允许")
@@ -46,17 +43,5 @@ public class UserController {
     @RequiresRoles("admin")
     public JsonResult redirectUpload() {
         return new JsonResult(HttpStatus.OK.value(), HttpStatus.OK.name(), true);
-    }
-
-    private void validation(UserDto userDto) {
-        if (userDto == null) {
-            throw new UserException("注册信息未提交!");
-        }
-        if (userDto.getUserName() == null || userDto.getPassword() == null) {
-            throw new UserException("缺少用户名或密码!");
-        }
-        if (userDto.getUuid() == null || userDto.getCode() == null) {
-            throw new UserException("验证信息不全!");
-        }
     }
 }

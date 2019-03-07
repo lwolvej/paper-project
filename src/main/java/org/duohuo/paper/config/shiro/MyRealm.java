@@ -10,6 +10,7 @@ import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.duohuo.paper.config.jwt.JwtToken;
+import org.duohuo.paper.manager.UserManager;
 import org.duohuo.paper.model.User;
 import org.duohuo.paper.repository.UserRepository;
 import org.duohuo.paper.utils.JwtUtil;
@@ -27,8 +28,8 @@ import java.util.Set;
 @Component
 public class MyRealm extends AuthorizingRealm {
 
-    @Resource(name = "userRepository")
-    private UserRepository userRepository;
+    @Resource(name = "userManager")
+    private UserManager userManager;
 
     /**
      * 必须重写此方法，否则shiro会报错
@@ -44,16 +45,12 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = JwtUtil.getUsername(principals.toString());
-        Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()) {
-            SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-            simpleAuthorizationInfo.addRole(user.get().getRole());
-            Set<String> permission = new HashSet<>(Arrays.asList(user.get().getPermission().split(",")));
-            simpleAuthorizationInfo.addStringPermissions(permission);
-            return simpleAuthorizationInfo;
-        } else {
-            throw new UnauthenticatedException("用户不存在!");
-        }
+        User user = userManager.findUserByUserName(username);
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        simpleAuthorizationInfo.addRole(user.getRole());
+        Set<String> permission = new HashSet<>(Arrays.asList(user.getPermission().split(",")));
+        simpleAuthorizationInfo.addStringPermissions(permission);
+        return simpleAuthorizationInfo;
     }
 
     /**
@@ -67,11 +64,8 @@ public class MyRealm extends AuthorizingRealm {
         if (username == null) {
             throw new AuthenticationException("Token错误!");
         }
-        Optional<User> userBean = userRepository.findById(username);
-        if (!userBean.isPresent()) {
-            throw new AuthenticationException("用户不存在!");
-        }
-        if (!JwtUtil.verify(token, username, userBean.get().getPassword())) {
+        User userBean = userManager.findUserByUserName(username);
+        if (!JwtUtil.verify(token, username, userBean.getPassword())) {
             throw new AuthenticationException("用户名或密码错误!");
         }
         return new SimpleAuthenticationInfo(token, token, "my_realm");

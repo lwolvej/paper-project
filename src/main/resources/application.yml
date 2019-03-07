@@ -1,7 +1,14 @@
 server:
   port: 6374
+  compression:
+    enabled: true
+
 
 spring:
+  data:
+    redis:
+      repositories:
+        enabled: false
   datasource:
     username: root
     password: 12345678
@@ -44,4 +51,7 @@ spring:
         min-idle: 10
         max-wait: 6000
         max-idle: 50
-
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false

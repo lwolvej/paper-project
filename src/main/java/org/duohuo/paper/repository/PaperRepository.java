@@ -78,4 +78,6 @@ public interface PaperRepository extends JpaRepository<Paper, Long> {
 
     @Query(value = "SELECT * FROM paper_info WHERE accession_number=(?1) AND paper_type IN (?2) AND time_id=(SELECT MAX(time_id) FROM paper_info)", nativeQuery = true)
     Optional<Paper> findMaxTimeDataByAccessionNumberPaperTypeIn(String accessionNumber, List<Integer> paperTypeList);
+
+    void deleteAllByTimeAndPaperTypeIn(final Time time, final List<PaperType> paperTypeList);
 }

@@ -1,6 +1,6 @@
 package org.duohuo.paper.model;
 
-import org.duohuo.paper.model.convert.PaperTypeConvert;
+import org.duohuo.paper.convert.PaperTypeConvert;
 
 import javax.persistence.*;
 import java.io.Serializable;

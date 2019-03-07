@@ -2,11 +2,10 @@ package org.duohuo.paper.service;
 
 import org.duohuo.paper.model.Journal;
 import org.duohuo.paper.model.result.JsonResult;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface JournalSearchService extends SearchService {
+public interface JournalSearchService {
 
     JsonResult getFellOut(Integer pageNum, Boolean ifDesc, String keyWord, List<Integer> categoryIdList);
 
@@ -32,6 +31,19 @@ public interface JournalSearchService extends SearchService {
 
     JsonResult searchByAll(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList, String keyWord);
 
-    @Transactional
-    JsonResult deleteByYearAndMonth(Integer year, Integer month);
+    JsonResult searchByCategory(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList);
+
+    JsonResult searchByYear(Integer pageNum, Boolean ifDesc, List<Integer> yearList);
+
+    JsonResult searchByMonth(Integer pageNum, Boolean ifDesc, List<Integer> monthList);
+
+    JsonResult searchByCategoryAndYear(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList);
+
+    JsonResult searchByCategoryAndMonth(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> monthList);
+
+    JsonResult searchByYearAndMonth(Integer pageNum, Boolean ifDesc, List<Integer> yearList, List<Integer> monthList);
+
+    JsonResult searchByCategoryAndYearAndMonth(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList);
+
+    JsonResult searchByNone(Integer pageNum, Boolean ifDesc);
 }

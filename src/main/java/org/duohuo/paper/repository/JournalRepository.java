@@ -50,4 +50,6 @@ public interface JournalRepository extends JpaRepository<Journal, Long> {
     Boolean existsByTime(Time time);
 
     void deleteAllByTime(Time time);
+
+    void deleteAllByTime_TimeId(Integer timeId);
 }

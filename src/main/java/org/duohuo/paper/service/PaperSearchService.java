@@ -2,62 +2,74 @@ package org.duohuo.paper.service;
 
 import org.duohuo.paper.model.Paper;
 import org.duohuo.paper.model.result.JsonResult;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface PaperSearchService extends SearchService {
+public interface PaperSearchService {
 
     List<Paper> getPaperListById(List<Long> ids);
 
-    JsonResult searchByAccessionNumber(Integer pageNum, Boolean ifDesc, String AccessionNumber);
+    JsonResult searchByCategory(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, Integer type);
 
-    JsonResult searchByDoi(Integer pageNum, Boolean ifDesc, String doi);
+    JsonResult searchByYear(Integer pageNum, Boolean ifDesc, List<Integer> yearList, Integer type);
 
-    JsonResult searchByArticleName(Integer pageNum, Boolean ifDesc, String articleName);
+    JsonResult searchByMonth(Integer pageNum, Boolean ifDesc, List<Integer> monthList, Integer type);
 
-    JsonResult searchByCategoryAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, String accessionNumber);
+    JsonResult searchByCategoryAndYear(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, Integer type);
 
-    JsonResult searchByCategoryAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, String doi);
+    JsonResult searchByCategoryAndMonth(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> monthList, Integer type);
 
-    JsonResult searchByCategoryAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, String articleName);
+    JsonResult searchByYearAndMonth(Integer pageNum, Boolean ifDesc, List<Integer> yearList, List<Integer> monthList, Integer type);
 
-    JsonResult searchByYearAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> yearList, String accessionNumber);
+    JsonResult searchByCategoryAndYearAndMonth(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList, Integer type);
 
-    JsonResult searchByYearAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> yearList, String doi);
+    JsonResult searchByNone(Integer pageNum, Boolean ifDesc, Integer type);
 
-    JsonResult searchByYearAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> yearList, String articleName);
+    JsonResult searchByAccessionNumber(Integer pageNum, Boolean ifDesc, String AccessionNumber, Integer type);
 
-    JsonResult searchByMonthAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> monthList, String accessionNumber);
+    JsonResult searchByDoi(Integer pageNum, Boolean ifDesc, String doi, Integer type);
 
-    JsonResult searchByMonthAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> monthList, String doi);
+    JsonResult searchByArticleName(Integer pageNum, Boolean ifDesc, String articleName, Integer type);
 
-    JsonResult searchByMonthAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> monthList, String articleName);
+    JsonResult searchByCategoryAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, String accessionNumber, Integer type);
 
-    JsonResult searchByCategoryAndYearAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, String accessionNumber);
+    JsonResult searchByCategoryAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, String doi, Integer type);
 
-    JsonResult searchByCategoryAndYearAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, String doi);
+    JsonResult searchByCategoryAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, String articleName, Integer type);
 
-    JsonResult searchByCategoryAndYearAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, String articleName);
+    JsonResult searchByYearAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> yearList, String accessionNumber, Integer type);
 
-    JsonResult searchByCategoryAndMonthAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> monthList, String accessionNumber);
+    JsonResult searchByYearAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> yearList, String doi, Integer type);
 
-    JsonResult searchByCategoryAndMonthAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> monthList, String doi);
+    JsonResult searchByYearAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> yearList, String articleName, Integer type);
 
-    JsonResult searchByCategoryAndMonthAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> monthList, String articleName);
+    JsonResult searchByMonthAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> monthList, String accessionNumber, Integer type);
 
-    JsonResult searchByYearAndMonthAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> yearList, List<Integer> monthList, String accessionNumber);
+    JsonResult searchByMonthAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> monthList, String doi, Integer type);
 
-    JsonResult searchByYearAndMonthAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> yearList, List<Integer> monthList, String doi);
+    JsonResult searchByMonthAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> monthList, String articleName, Integer type);
 
-    JsonResult searchByYearAndMonthAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> yearList, List<Integer> monthList, String articleName);
+    JsonResult searchByCategoryAndYearAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, String accessionNumber, Integer type);
 
-    JsonResult searchByCategoryAndYearAndMonthAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList, String accessionNumber);
+    JsonResult searchByCategoryAndYearAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, String doi, Integer type);
 
-    JsonResult searchByCategoryAndYearAndMonthAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList, String doi);
+    JsonResult searchByCategoryAndYearAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, String articleName, Integer type);
 
-    JsonResult searchByCategoryAndYearAndMonthAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList, String articleName);
+    JsonResult searchByCategoryAndMonthAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> monthList, String accessionNumber, Integer type);
 
-    @Transactional
-    JsonResult deleteByYearAndMonth(Integer year, Integer month);
+    JsonResult searchByCategoryAndMonthAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> monthList, String doi, Integer type);
+
+    JsonResult searchByCategoryAndMonthAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> monthList, String articleName, Integer type);
+
+    JsonResult searchByYearAndMonthAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> yearList, List<Integer> monthList, String accessionNumber, Integer type);
+
+    JsonResult searchByYearAndMonthAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> yearList, List<Integer> monthList, String doi, Integer type);
+
+    JsonResult searchByYearAndMonthAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> yearList, List<Integer> monthList, String articleName, Integer type);
+
+    JsonResult searchByCategoryAndYearAndMonthAndAccessionNumber(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList, String accessionNumber, Integer type);
+
+    JsonResult searchByCategoryAndYearAndMonthAndDoi(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList, String doi, Integer type);
+
+    JsonResult searchByCategoryAndYearAndMonthAndArticleName(Integer pageNum, Boolean ifDesc, List<Integer> categoryIdList, List<Integer> yearList, List<Integer> monthList, String articleName, Integer type);
 }

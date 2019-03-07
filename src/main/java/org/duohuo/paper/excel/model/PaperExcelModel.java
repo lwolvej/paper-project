@@ -36,7 +36,7 @@ public class PaperExcelModel extends BaseRowModel {
     private String researchField;
 
     @ExcelProperty(index = 7)
-    private Integer timesCited;
+    private Integer timeCited;
 
     @ExcelProperty(index = 8)
     private String countries;
@@ -109,12 +109,12 @@ public class PaperExcelModel extends BaseRowModel {
         this.researchField = researchField;
     }
 
-    public Integer getTimesCited() {
-        return timesCited;
+    public Integer getTimeCited() {
+        return timeCited;
     }
 
-    public void setTimesCited(Integer timesCited) {
-        this.timesCited = timesCited;
+    public void setTimeCited(Integer timeCited) {
+        this.timeCited = timeCited;
     }
 
     public String getCountries() {
@@ -161,7 +161,7 @@ public class PaperExcelModel extends BaseRowModel {
                 Objects.equals(authors, that.authors) &&
                 Objects.equals(source, that.source) &&
                 Objects.equals(researchField, that.researchField) &&
-                Objects.equals(timesCited, that.timesCited) &&
+                Objects.equals(timeCited, that.timeCited) &&
                 Objects.equals(countries, that.countries) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(institutions, that.institutions) &&
@@ -170,44 +170,24 @@ public class PaperExcelModel extends BaseRowModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessionNumber, doi, pmid, articleName, authors, source, researchField, timesCited, countries, address, institutions, publicationDate);
+        return Objects.hash(accessionNumber, doi, pmid, articleName, authors, source, researchField, timeCited, countries, address, institutions, publicationDate);
     }
 
     @Override
     public String toString() {
         return "PaperExcelModel{" +
-                "accession='" + accessionNumber + '\'' +
+                "accessionNumber='" + accessionNumber + '\'' +
                 ", doi='" + doi + '\'' +
                 ", pmid='" + pmid + '\'' +
                 ", articleName='" + articleName + '\'' +
                 ", authors='" + authors + '\'' +
                 ", source='" + source + '\'' +
                 ", researchField='" + researchField + '\'' +
-                ", timesCited=" + timesCited +
+                ", timeCited=" + timeCited +
                 ", countries='" + countries + '\'' +
                 ", address='" + address + '\'' +
                 ", institutions='" + institutions + '\'' +
-                ", publicationDate='" + publicationDate + '\'' +
+                ", publicationDate=" + publicationDate +
                 '}';
-    }
-
-    public Paper convertToPaper(PaperType type, Category category, Time time) {
-        Paper paper = new Paper();
-        paper.setAccessionNumber(this.accessionNumber);
-        paper.setAddresses(this.address);
-        paper.setAuthors(this.authors);
-        paper.setArticleName(this.articleName);
-        paper.setCountries(this.countries);
-        paper.setPmid(this.pmid);
-        paper.setSource(this.source);
-        paper.setDoi(this.doi);
-        paper.setPublicationDate(this.publicationDate);
-        paper.setInstitutions(this.institutions);
-        paper.setResearchField(this.researchField);
-        paper.setTimesCited(this.timesCited);
-        paper.setPaperType(type);
-        paper.setCategory(category);
-        paper.setTime(time);
-        return paper;
     }
 }

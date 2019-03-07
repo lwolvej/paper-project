@@ -45,6 +45,10 @@ public class RedisRepository {
 //        }
     }
 
+    public void set(String key, Object value) {
+        redisTemplate.opsForValue().set(key, value);
+    }
+
     public Boolean has(String key) {
         return redisTemplate.hasKey(key);
     }
@@ -56,7 +60,7 @@ public class RedisRepository {
      */
     @SuppressWarnings("ConstantConditions")
     public void del(String key) {
-        if (!redisTemplate.hasKey(key)) {
+        if (redisTemplate.hasKey(key)) {
             redisTemplate.delete(key);
         }
     }
