@@ -23,8 +23,9 @@ public class CacheCleanTask {
 
 
     //每三天凌晨两点清空，paper,incites,journal,baseLine
-    @Scheduled(cron = "0 0 2 1/10 * ? *")
+    @Scheduled(cron = "0 0 2 1/10 * ?")
     public void cacheClean() {
+        LOGGER.info("开始清理相关缓存");
         redisRepository.delByPattern("paper_*");
         LOGGER.info("成功清理关于论文有关缓存");
         redisRepository.delByPattern("incites_*");
@@ -35,8 +36,9 @@ public class CacheCleanTask {
         LOGGER.info("成功清理管理基准线有关缓存");
     }
 
+    //    0 0 12 1/1 * ? *
     //每天四点随机清空一个key
-    @Scheduled(cron = "0 0 4 * * ? *")
+    @Scheduled(cron = "0 0 4 * * ?")
     public void randomClean() {
         redisRepository.delByRandom();
         LOGGER.info("成功随机清理一个缓存");

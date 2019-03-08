@@ -44,19 +44,19 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
     private Integer publicationDate;
 
     @ExcelProperty(index = 12, value = "期刊预期被引频次")
-    private Double journalExpectCitedTimes;
+    private String journalExpectCitedTimes;
 
     @ExcelProperty(index = 13, value = "类别预期被引频次")
-    private Double subjectExpectCitedTimes;
+    private String subjectExpectCitedTimes;
 
     @ExcelProperty(index = 14, value = "期刊规范化的引文影响力")
-    private Double journalInfluence;
+    private String journalInfluence;
 
     @ExcelProperty(index = 15, value = "学科规范化的引文影响力")
-    private Double subjectInfluence;
+    private String subjectInfluence;
 
     @ExcelProperty(index = 16, value = "学科领域百分位")
-    private Double subjectAreaPercentile;
+    private String subjectAreaPercentile;
 
     @ExcelProperty(index = 17, value = "期刊影响因子")
     private String journalImpactFactor;
@@ -158,43 +158,43 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
         this.publicationDate = publicationDate;
     }
 
-    public Double getJournalExpectCitedTimes() {
+    public String getJournalExpectCitedTimes() {
         return journalExpectCitedTimes;
     }
 
-    public void setJournalExpectCitedTimes(Double journalExpectCitedTimes) {
+    public void setJournalExpectCitedTimes(String journalExpectCitedTimes) {
         this.journalExpectCitedTimes = journalExpectCitedTimes;
     }
 
-    public Double getSubjectExpectCitedTimes() {
+    public String getSubjectExpectCitedTimes() {
         return subjectExpectCitedTimes;
     }
 
-    public void setSubjectExpectCitedTimes(Double subjectExpectCitedTimes) {
+    public void setSubjectExpectCitedTimes(String subjectExpectCitedTimes) {
         this.subjectExpectCitedTimes = subjectExpectCitedTimes;
     }
 
-    public Double getJournalInfluence() {
+    public String getJournalInfluence() {
         return journalInfluence;
     }
 
-    public void setJournalInfluence(Double journalInfluence) {
+    public void setJournalInfluence(String journalInfluence) {
         this.journalInfluence = journalInfluence;
     }
 
-    public Double getSubjectInfluence() {
+    public String getSubjectInfluence() {
         return subjectInfluence;
     }
 
-    public void setSubjectInfluence(Double subjectInfluence) {
+    public void setSubjectInfluence(String subjectInfluence) {
         this.subjectInfluence = subjectInfluence;
     }
 
-    public Double getSubjectAreaPercentile() {
+    public String getSubjectAreaPercentile() {
         return subjectAreaPercentile;
     }
 
-    public void setSubjectAreaPercentile(Double subjectAreaPercentile) {
+    public void setSubjectAreaPercentile(String subjectAreaPercentile) {
         this.subjectAreaPercentile = subjectAreaPercentile;
     }
 

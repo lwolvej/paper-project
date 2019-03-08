@@ -22,7 +22,7 @@ import java.util.List;
 public final class ExcelUtil {
 
     //type=1为paper，type=2为journal
-    public static byte[] getDownByte(List<BaseRowModel> data, int type) {
+    public static byte[] getDownByte(final List<BaseRowModel> data, final int type) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ExcelWriter excelWriter = new ExcelWriter(outputStream, ExcelTypeEnum.XLSX, true);
         if (type == 1) {
@@ -50,7 +50,7 @@ public final class ExcelUtil {
         );
     }
 
-    public static Sheet createIncitesSheet() {
+    private static Sheet createIncitesSheet() {
         Sheet sheet = new Sheet(1, 19, IncitesDownloadExcelModel.class);
         sheet.setSheetName("sheet1");
         sheet.setTableStyle(createTableStyle());
@@ -58,7 +58,7 @@ public final class ExcelUtil {
         return sheet;
     }
 
-    public static Sheet createPaperSheet() {
+    private static Sheet createPaperSheet() {
         Sheet sheet = new Sheet(1, 11, PaperExcelDownloadModel.class);
         sheet.setSheetName("sheet1");
         sheet.setTableStyle(createTableStyle());
@@ -66,7 +66,7 @@ public final class ExcelUtil {
         return sheet;
     }
 
-    public static Sheet createJournalSheet() {
+    private static Sheet createJournalSheet() {
         Sheet sheet = new Sheet(1, 7, JournalDownloadModel.class);
         sheet.setSheetName("sheet1");
         sheet.setTableStyle(createTableStyle());

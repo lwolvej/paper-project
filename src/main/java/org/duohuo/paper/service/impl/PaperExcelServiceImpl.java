@@ -87,12 +87,12 @@ public class PaperExcelServiceImpl implements PaperExcelService {
             //判断是不是图片文件
             if (RegexUtil.imageRegex(tempFileName)) {
                 imageFilePathMap.put(
-                        Integer.parseInt(fileName.split("-")[0]),
+                        Integer.parseInt(tempFileName.split("-")[0]),
                         filePath
                 );
             } else if (RegexUtil.excelFileValidation(tempFileName)) {
                 //判断是不是excel文件同时判断是不是临时文件
-                if (!fileName.contains("~$")) {
+                if (!tempFileName.contains("~$")) {
                     excelPath = filePath;
                 }
             }
@@ -101,7 +101,7 @@ public class PaperExcelServiceImpl implements PaperExcelService {
             throw new ZipFileException("本校论文压缩包中没有找到符合规格的excel文件:" + fileName);
         }
         //读取excel中文件
-        List<PaperExcelModel> excelModels = excelManager.paperExcelRead(excelPath);
+        List<PaperExcelModel> excelModels = excelManager.paperExcelRead(typeFilePath + excelPath);
         int size = excelModels.size();
         //获取类别的map
         Map<String, Category> categoryMap = categoryManager.createCategoryNameMap();
@@ -116,11 +116,11 @@ public class PaperExcelServiceImpl implements PaperExcelService {
             //获取临时的excelModel
             PaperExcelModel tempExcelModel = excelModels.get(i);
             //如果判断出类别不存在，抛出异常
-            if (!categoryMap.containsKey(tempExcelModel.getResearchField())) {
+            if (!categoryMap.containsKey(tempExcelModel.getResearchField().toUpperCase())) {
                 throw new ZipFileException("本校论文压缩包中没有找到符合规格类别:" + tempExcelModel.getResearchField());
             }
             //获取类别
-            Category category = categoryMap.get(tempExcelModel.getResearchField());
+            Category category = categoryMap.get(tempExcelModel.getResearchField().toUpperCase());
             //如果是这个时间点不存在的paper，直接插入。如果存在，则获取旧的id以及将type改变。然后保存
             Paper paper = paperManager.save(getNewAndChangeOld(type, time, category, tempExcelModel));
             //获取image文件
@@ -156,7 +156,7 @@ public class PaperExcelServiceImpl implements PaperExcelService {
             if (excelFile.isDirectory()) continue;
             String excelFileName = excelFile.getName();
             //如果是临时文件跳过
-            if (fileName.contains("~$")) continue;
+            if (excelFileName.contains("~$")) continue;
             //如果是xlsx文件加入
             if (RegexUtil.excelFileValidation(excelFileName)) {
                 excelFilePathList.add(path);
@@ -173,7 +173,7 @@ public class PaperExcelServiceImpl implements PaperExcelService {
             //读取
             List<PaperExcelModel> paperExcelModels = excelManager.paperExcelRead(typeFilePath + excelFilePath);
             //从第一个来获取类别名称
-            String categoryName = paperExcelModels.get(0).getResearchField();
+            String categoryName = paperExcelModels.get(0).getResearchField().toUpperCase();
             //如果不包括该类别，则抛出异常
             if (!categoryMap.containsKey(categoryName)) {
                 throw new ExcelException("上传的excel文件中存在未知的类别:" + categoryName);

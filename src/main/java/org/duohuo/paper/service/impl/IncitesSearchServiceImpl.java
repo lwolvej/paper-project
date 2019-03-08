@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("incitesSearchServiceImpl")
-public class IncitesSearchSearchServiceImpl implements IncitesSearchService {
+public class IncitesSearchServiceImpl implements IncitesSearchService {
 
     @Resource(name = "paperTypeManager")
     private PaperTypeManager paperTypeManager;

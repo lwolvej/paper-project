@@ -27,7 +27,7 @@ class PaperExcelToEntityConvert extends Converter<Paper, PaperExcelModel> {
             paper.setInstitutions(paperExcelModel.getInstitutions());
             paper.setResearchField(paperExcelModel.getResearchField());
             paper.setTimesCited(paperExcelModel.getTimeCited());
-            return null;
+            return paper;
         }
     }
 }

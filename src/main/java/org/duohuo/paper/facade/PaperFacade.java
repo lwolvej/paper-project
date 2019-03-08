@@ -16,6 +16,8 @@ import org.duohuo.paper.service.PaperExcelService;
 import org.duohuo.paper.service.PaperSearchService;
 import org.duohuo.paper.service.SchoolPaperImageService;
 import org.duohuo.paper.utils.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -24,12 +26,15 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component("paperFacade")
 public class PaperFacade {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaperFacade.class);
 
     @Resource(name = "paperSearchServiceImpl")
     private PaperSearchService paperSearchService;
@@ -60,8 +65,17 @@ public class PaperFacade {
         } else {
             resultPath = resultPath.concat(FolderConstant.TEMP_FILE_SCHOOL_HOT_PAPER + random);
         }
+        resultPath = resultPath + File.separator;
+        File t = new File(resultPath);
+        if (!t.exists()) {
+            if (!t.mkdirs()) {
+                throw new ZipFileException("创建临时目录失败");
+            } else {
+                LOGGER.info("创建临时目录成功:" + resultPath);
+            }
+        }
         String fileName = file.getOriginalFilename();
-        if (RegexUtil.zipFileValidation(fileName)) {
+        if (!RegexUtil.zipFileValidation(fileName)) {
             throw new ZipFileException("上传zip文件不规范:" + fileName);
         }
         byte[] data;

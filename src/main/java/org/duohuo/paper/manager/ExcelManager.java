@@ -25,12 +25,12 @@ public class ExcelManager {
 
     public List<String> filePathFilter(final List<String> filePath, final String typeFilePath) {
         List<String> newFilePath = filePath.stream()
-                .peek(elem -> {
-                    if (elem.contains("_MACOSX") || elem.contains(".DS_Store")) {
-                        new File(typeFilePath + elem)
-                                .deleteOnExit();
-                    }
-                })
+//                .peek(elem -> {
+//                    if (elem.contains("_MACOSX") || elem.contains(".DS_Store")) {
+//                        new File(typeFilePath + elem)
+//                                .deleteOnExit();
+//                    }
+//                })
                 .filter(elem -> !elem.contains("_MACOSX")
                         && !elem.contains(".DS_Store"))
                 .collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class ExcelManager {
         AnalysisEventListener listener;
         try (InputStream inputStream = new ByteArrayInputStream(data)) {
             listener = new IncitesExcelListener();
-            ExcelReader reader = new ExcelReader(inputStream, null, listener);
+            ExcelReader reader = new ExcelReader(inputStream, ExcelTypeEnum.XLSX, null, listener);
             reader.read(new Sheet(1, 1, IncitesExcelModel.class));
         } catch (IOException e) {
             throw new ExcelException(e.getMessage());

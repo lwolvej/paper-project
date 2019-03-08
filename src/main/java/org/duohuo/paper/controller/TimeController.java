@@ -3,6 +3,7 @@ package org.duohuo.paper.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.duohuo.paper.annotation.RequestLimit;
 import org.duohuo.paper.facade.TimeFacade;
 import org.duohuo.paper.model.result.JsonResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class TimeController {
     @Resource(name = "timeFacade")
     private TimeFacade timeFacade;
 
+    @RequestLimit(count = 20)
     @ApiOperation(value = "获取所有年份")
     @GetMapping("/allYear")
     @RequiresAuthentication

@@ -4,6 +4,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.duohuo.paper.annotation.KeyOperation;
+import org.duohuo.paper.annotation.RequestLimit;
 import org.duohuo.paper.facade.UserFacade;
 import org.duohuo.paper.model.dto.UserDto;
 import org.duohuo.paper.model.result.JsonResult;
@@ -23,6 +25,7 @@ public class UserController {
     @Resource(name = "userFacade")
     private UserFacade userFacade;
 
+    @RequestLimit(count = 10)
     @ApiOperation(value = "用户登录")
     @PostMapping("/login")
     @ResponseBody
@@ -30,6 +33,7 @@ public class UserController {
         return userFacade.loginFacade(userDto);
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
     @ApiOperation(value = "用户注册")
     @PostMapping("/register")
     @ResponseBody

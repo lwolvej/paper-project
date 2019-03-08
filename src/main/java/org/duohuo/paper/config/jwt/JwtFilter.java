@@ -8,6 +8,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author LwolveJ
@@ -22,7 +24,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
         String authorization = req.getHeader("Authorization");
-        return authorization != null;
+        return authorization != null && authorization.length() != 0;
     }
 
     @Override
@@ -43,8 +45,9 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         if (isLoginAttempt(request, response)) {
             try {
                 executeLogin(request, response);
+                return true;
             } catch (Exception e) {
-                return false;
+                response401((HttpServletResponse) response);
             }
         }
         return true;
@@ -68,15 +71,17 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         return super.preHandle(request, response);
     }
 
-//    /**
-//     * 将非法请求跳转到 /401
-//     */
-//    private void response401(ServletRequest req, ServletResponse resp) {
-//        try {
-//            HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
-//            httpServletResponse.sendRedirect("/401");
-//        } catch (IOException e) {
-//            LOGGER.error(e.getMessage());
-//        }
-//    }
+
+    // 非法请求返回401
+    private void response401(HttpServletResponse resp) {
+        try {
+            resp.setContentType("application/json;charset=UTF-8");
+            resp.setCharacterEncoding("utf-8");
+            PrintWriter writer = resp.getWriter();
+            writer.println("{\"code\":401,\"msg\":\"UNAUTHORIZED\",\"data\":null}");
+            writer.flush();
+            writer.close();
+        } catch (IOException ignore) {
+        }
+    }
 }

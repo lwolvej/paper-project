@@ -1,6 +1,7 @@
 package org.duohuo.paper.exceptions;
 
 import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.duohuo.paper.model.result.JsonResult;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
+
+import javax.servlet.ServletException;
 
 /**
  * @author lwolvej
@@ -49,6 +52,13 @@ public class ExceptionController {
     public JsonResult handleNotFoundException(NotFoundException e) {
         LOGGER.warn(e.getMessage());
         return new JsonResult(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AuthenticationException.class)
+    public JsonResult handleAuthentication(AuthenticationException e) {
+        LOGGER.warn(e.getMessage());
+        return new JsonResult(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.name());
     }
 
     //ShiroException，用户身份验证出现错误
@@ -91,6 +101,13 @@ public class ExceptionController {
         return new JsonResult(HttpStatus.BAD_REQUEST.value(), "检测到跨站脚本攻击!");
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ServletException.class)
+    public JsonResult handleServletException(ServletException e) {
+        LOGGER.warn(e.getMessage());
+        return new JsonResult(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name());
+    }
+
     //RuntimeException，运行时错误，服务器内部错误
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
@@ -112,7 +129,8 @@ public class ExceptionController {
         LOGGER.warn(ex.getMessage());
         if (ex instanceof NoHandlerFoundException) {
             return new JsonResult(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.name());
+        } else {
+            return new JsonResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), "出现异常!");
         }
-        return new JsonResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), "出现异常!");
     }
 }

@@ -36,7 +36,7 @@ public class IncitesExcelServiceImpl implements IncitesExcelService {
         Map<String, Category> categoryMap = categoryManager.createCategoryNameMap();
         List<Incites> incitesList = new ArrayList<>();
         for (IncitesExcelModel excelModel : excelModels) {
-            String categoryName = excelModel.getResearchField();
+            String categoryName = excelModel.getResearchField().toUpperCase();
             if (!categoryMap.containsKey(categoryName)) {
                 throw new NotFoundException("Incites插入没有找到指定的学科类别:" + categoryName);
             }

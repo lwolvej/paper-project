@@ -31,15 +31,15 @@ public class IncitesResult implements Serializable {
 
     private Integer publicationDate;
 
-    private Double journalExpectCitedTimes;
+    private String journalExpectCitedTimes;
 
-    private Double subjectExpectCitedTimes;
+    private String subjectExpectCitedTimes;
 
-    private Double journalInfluence;
+    private String journalInfluence;
 
-    private Double subjectInfluence;
+    private String subjectInfluence;
 
-    private Double subjectAreaPercentile;
+    private String subjectAreaPercentile;
 
     private String journalImpactFactor;
 
@@ -140,35 +140,43 @@ public class IncitesResult implements Serializable {
         this.publicationDate = publicationDate;
     }
 
-    public Double getJournalExpectCitedTimes() {
+    public String getJournalExpectCitedTimes() {
         return journalExpectCitedTimes;
     }
 
-    public void setJournalExpectCitedTimes(Double journalExpectCitedTimes) {
+    public void setJournalExpectCitedTimes(String journalExpectCitedTimes) {
         this.journalExpectCitedTimes = journalExpectCitedTimes;
     }
 
-    public Double getSubjectExpectCitedTimes() {
+    public String getSubjectExpectCitedTimes() {
         return subjectExpectCitedTimes;
     }
 
-    public void setSubjectExpectCitedTimes(Double subjectExpectCitedTimes) {
+    public void setSubjectExpectCitedTimes(String subjectExpectCitedTimes) {
         this.subjectExpectCitedTimes = subjectExpectCitedTimes;
     }
 
-    public Double getJournalInfluence() {
+    public String getJournalInfluence() {
         return journalInfluence;
     }
 
-    public void setJournalInfluence(Double journalInfluence) {
+    public void setJournalInfluence(String journalInfluence) {
         this.journalInfluence = journalInfluence;
     }
 
-    public Double getSubjectAreaPercentile() {
+    public String getSubjectInfluence() {
+        return subjectInfluence;
+    }
+
+    public void setSubjectInfluence(String subjectInfluence) {
+        this.subjectInfluence = subjectInfluence;
+    }
+
+    public String getSubjectAreaPercentile() {
         return subjectAreaPercentile;
     }
 
-    public void setSubjectAreaPercentile(Double subjectAreaPercentile) {
+    public void setSubjectAreaPercentile(String subjectAreaPercentile) {
         this.subjectAreaPercentile = subjectAreaPercentile;
     }
 
@@ -210,14 +218,6 @@ public class IncitesResult implements Serializable {
 
     public void setValue(Double value) {
         this.value = value;
-    }
-
-    public Double getSubjectInfluence() {
-        return subjectInfluence;
-    }
-
-    public void setSubjectInfluence(Double subjectInfluence) {
-        this.subjectInfluence = subjectInfluence;
     }
 
     @Override

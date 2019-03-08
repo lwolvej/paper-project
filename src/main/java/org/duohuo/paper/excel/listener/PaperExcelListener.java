@@ -22,8 +22,6 @@ public class PaperExcelListener extends AnalysisEventListener<PaperExcelModel> {
     public void invoke(PaperExcelModel paperExcelModel, AnalysisContext analysisContext) {
         if (ValidationUtil.validation(paperExcelModel)) {
             vector.add(paperExcelModel);
-        } else {
-            LOGGER.info("插入: {} 失败!", paperExcelModel);
         }
     }
 
@@ -34,9 +32,5 @@ public class PaperExcelListener extends AnalysisEventListener<PaperExcelModel> {
 
     public Vector<PaperExcelModel> getVector() {
         return vector;
-    }
-
-    public void setVector(Vector<PaperExcelModel> vector) {
-        this.vector = vector;
     }
 }

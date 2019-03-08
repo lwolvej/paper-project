@@ -22,8 +22,6 @@ public class JournalExcelListener extends AnalysisEventListener<JournalExcelMode
     public void invoke(JournalExcelModel journalExcelModel, AnalysisContext analysisContext) {
         if (ValidationUtil.validation(journalExcelModel)) {
             vector.add(journalExcelModel);
-        } else {
-            LOGGER.info("插入: {} 失败!", journalExcelModel);
         }
     }
 
@@ -34,9 +32,5 @@ public class JournalExcelListener extends AnalysisEventListener<JournalExcelMode
 
     public Vector<JournalExcelModel> getVector() {
         return vector;
-    }
-
-    public void setVector(Vector<JournalExcelModel> vector) {
-        this.vector = vector;
     }
 }

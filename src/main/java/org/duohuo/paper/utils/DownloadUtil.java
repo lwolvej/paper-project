@@ -10,7 +10,7 @@ public final class DownloadUtil {
 
     }
 
-    public static ResponseEntity<byte[]> getResponseEntity(String fileName, byte[] data) {
+    public static ResponseEntity<byte[]> getResponseEntity(final String fileName, final byte[] data) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Disposition", "attachment;filename=" + fileName + ".xlsx");
         httpHeaders.add("Pragma", "No-cache");

@@ -38,7 +38,7 @@ public final class FileUtil {
 //    }
 
 
-    public static byte[] createZipWithOutPutStreams(Map<String, byte[]> fileMap) {
+    public static byte[] createZipWithOutPutStreams(final Map<String, byte[]> fileMap) {
         ZipOutputStream zipOutputStream;
         for (Map.Entry<String, byte[]> file : fileMap.entrySet()) {
             InputStream inputStream = new ByteArrayInputStream(file.getValue());
@@ -56,7 +56,7 @@ public final class FileUtil {
     }
 
     //删除临时文件
-    public static void fileDelete(List<String> filePaths, String targetPath) {
+    public static void fileDelete(final List<String> filePaths, final String targetPath) {
         for (String path : filePaths) {
             File file = new File(targetPath + path);
             if (file.isDirectory()) {
@@ -66,7 +66,7 @@ public final class FileUtil {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private static void fileDelete(File directFile) {
+    private static void fileDelete(final File directFile) {
         File[] files = directFile.listFiles();
         if (files != null) {
             for (File file : files) {
@@ -83,7 +83,7 @@ public final class FileUtil {
     /*
     需要zip存储路径，解压之后的文件路径，以及文件名称
      */
-    public static List<String> decompressZipFile(byte[] data, String targetPath, String decompressPath, String fileName) {
+    public static List<String> decompressZipFile(final byte[] data, final String targetPath, final String decompressPath, final String fileName) {
         String originalZipFilePath = targetPath + File.separator + fileName;
         //这是压缩文件
         File file = saveFile(data, originalZipFilePath);
@@ -91,10 +91,12 @@ public final class FileUtil {
         List<String> resultPathList = new ArrayList<>();
         try {
             zipFile = new ZipFile(file);
+            zipFile.setFileNameCharset("utf-8");
             zipFile.extractAll(decompressPath);
             List fileHeaderList = zipFile.getFileHeaders();
             if (fileHeaderList == null) {
-                file.deleteOnExit();
+                //noinspection ResultOfMethodCallIgnored
+                file.delete();
                 throw new ZipFileException("上传zip为空:" + fileName);
             }
             for (Object o : fileHeaderList) {
@@ -104,12 +106,13 @@ public final class FileUtil {
             throw new ZipFileException("Zip处理出错:" + fileName);
         } finally {
             //最后删除压缩文件
-            file.deleteOnExit();
+            //noinspection ResultOfMethodCallIgnored
+            file.delete();
         }
         return resultPathList;
     }
 
-    private static File saveFile(byte[] data, String zipFilePath) {
+    private static File saveFile(final byte[] data, final String zipFilePath) {
         File file = new File(zipFilePath);
         OutputStream outputStream = null;
         try {

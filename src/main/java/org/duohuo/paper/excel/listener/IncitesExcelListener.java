@@ -22,21 +22,15 @@ public class IncitesExcelListener extends AnalysisEventListener<IncitesExcelMode
     public void invoke(IncitesExcelModel incitesExcelModel, AnalysisContext analysisContext) {
         if (ValidationUtil.validation(incitesExcelModel)) {
             vector.add(incitesExcelModel);
-        } else {
-            LOGGER.info("插入: {} 失败!", incitesExcelModel);
         }
     }
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-
+        LOGGER.info("成功处理一个Excel!");
     }
 
     public Vector<IncitesExcelModel> getVector() {
         return vector;
-    }
-
-    public void setVector(Vector<IncitesExcelModel> vector) {
-        this.vector = vector;
     }
 }

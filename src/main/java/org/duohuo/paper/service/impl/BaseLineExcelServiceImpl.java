@@ -76,7 +76,7 @@ public class BaseLineExcelServiceImpl implements BaseLineExcelService {
                 List<Object> categoryObjects = (List<Object>) originalObjects.get(i);
                 for (Object o : categoryObjects) {
                     if (o != null) {
-                        categoryName = ((String) o).trim();
+                        categoryName = ((String) o).trim().toUpperCase();
                         break;
                     }
                 }

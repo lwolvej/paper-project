@@ -10,6 +10,9 @@ import net.lingala.zip4j.model.ZipParameters;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.duohuo.paper.annotation.KeyOperation;
+import org.duohuo.paper.annotation.RequestLimit;
+import org.duohuo.paper.annotation.Upload;
 import org.duohuo.paper.exceptions.NotFoundException;
 import org.duohuo.paper.exceptions.ZipFileException;
 import org.duohuo.paper.facade.PaperFacade;
@@ -40,6 +43,7 @@ public class PaperController {
     @Resource(name = "paperFacade")
     private PaperFacade paperFacade;
 
+    @KeyOperation(operation = KeyOperation.Operation.DELETE)
     @ApiOperation(value = "删除esi高被引某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/esi/highlyCited/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -47,6 +51,7 @@ public class PaperController {
         return paperFacade.deletePaperFacade(deleteDto, 1);
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.DELETE)
     @ApiOperation(value = "删除esi热点某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/esi/hot/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -54,6 +59,7 @@ public class PaperController {
         return paperFacade.deletePaperFacade(deleteDto, 2);
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.DELETE)
     @ApiOperation(value = "删除我校高被引某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/school/highlyCited/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -61,6 +67,7 @@ public class PaperController {
         return paperFacade.deletePaperFacade(deleteDto, 3);
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.DELETE)
     @ApiOperation(value = "删除esi热点某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/school/hot/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -68,6 +75,7 @@ public class PaperController {
         return paperFacade.deletePaperFacade(deleteDto, 4);
     }
 
+    @RequestLimit(count = 20)
     @ApiOperation(value = "esi高被引", notes = "搜索条件有年月和学科名称")
     @Cacheable(value = "paper_highly_cited_search_all", keyGenerator = "redisKeyGenerator")
     @PostMapping(value = "/esi/highlyCited/search")
@@ -76,6 +84,7 @@ public class PaperController {
         return paperFacade.paperSearchFacade(searchDto, 1);
     }
 
+    @RequestLimit(count = 20)
     @ApiOperation(value = "esi热点", notes = "搜索条件有年月和学科名称")
     @Cacheable(value = "paper_hot_search_all", keyGenerator = "redisKeyGenerator")
     @PostMapping(value = "/esi/hot/search")
@@ -84,6 +93,7 @@ public class PaperController {
         return paperFacade.paperSearchFacade(searchDto, 2);
     }
 
+    @RequestLimit(count = 20)
     @ApiOperation(value = "本校高被引", notes = "搜索条件有年月和学科名称")
     @Cacheable(value = "paper_school_highly_cited_search_all", keyGenerator = "redisKeyGenerator")
     @PostMapping(value = "/school/highlyCited/search")
@@ -92,6 +102,7 @@ public class PaperController {
         return paperFacade.paperSearchFacade(searchDto, 3);
     }
 
+    @RequestLimit(count = 20)
     @ApiOperation(value = "本校热点", notes = "搜索条件有年月和学科名称")
     @Cacheable(value = "paper_school_hot_search_all", keyGenerator = "redisKeyGenerator")
     @PostMapping(value = "/school/hotPaper/search")
@@ -100,6 +111,8 @@ public class PaperController {
         return paperFacade.paperSearchFacade(searchDto, 4);
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @Upload
     @ApiOperation(value = "esi论文高被引上传", notes = "esi高被引论文上传, 上传一个zip压缩包")
     @PostMapping(value = "/esi/highlyCited/upload")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -109,6 +122,8 @@ public class PaperController {
         return paperFacade.uploadFileFacade(file, year, month, 1);
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @Upload
     @ApiOperation(value = "esi论文热点论文上传", notes = "esi热点论文上传，上传一个zip压缩包")
     @PostMapping(value = "/esi/hot/upload")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -118,6 +133,8 @@ public class PaperController {
         return paperFacade.uploadFileFacade(file, year, month, 2);
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @Upload
     @ApiOperation(value = "本校高被引论文上传", notes = "本校高被引论文上传，上传一个zip包")
     @PostMapping("/school/highlyCited/upload")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -127,6 +144,8 @@ public class PaperController {
         return paperFacade.uploadFileFacade(file, year, month, 3);
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @Upload
     @ApiOperation(value = "本校热点论文上传", notes = "本校热点论文上传, 上传一个zip包")
     @PostMapping("/school/hot/upload")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -136,17 +155,19 @@ public class PaperController {
         return paperFacade.uploadFileFacade(file, year, month, 4);
     }
 
+    @RequestLimit(count = 10)
     @ApiOperation(value = "esi论文下载", notes = "直接下载")
     @PostMapping(value = "/esi/download")
     @RequiresAuthentication
-    public ResponseEntity<byte[]> journalDownload(@ApiParam("下载的具体条目") @RequestBody DownloadDto downloadDto) {
+    public ResponseEntity<byte[]> esiPaperDownload(@ApiParam("下载的具体条目") @RequestBody DownloadDto downloadDto) {
         return paperFacade.downloadEsiPaperFacade(downloadDto);
     }
 
+    @RequestLimit(count = 10)
     @ApiOperation(value = "下载我校论文信息", notes = "下载一个zip，包括图片和excel，在swagger无法作出正常下载")
     @PostMapping(value = "/school/download")
     @RequiresAuthentication
-    public void download(@RequestBody DownloadDto downloadDto, HttpServletResponse response) {
+    public void schoolPaperDownload(@RequestBody DownloadDto downloadDto, HttpServletResponse response) {
         if (downloadDto == null) {
             throw new NotFoundException("缺少下载数据");
         }

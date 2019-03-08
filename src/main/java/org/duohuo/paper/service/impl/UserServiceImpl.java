@@ -38,13 +38,11 @@ public class UserServiceImpl implements UserService {
     public JsonResult register(String userName, String password, String uuid, String code) {
         userManager.captchaValidation(uuid, code);
         userManager.save(userName, password);
-        LOGGER.info("用户:{}, 成功注册!", userName);
         return doLogin(userName, password);
     }
 
     private JsonResult doLogin(String userName, String password) {
         String jwtCode = JwtUtil.sign(userName, password);
-        LOGGER.info("用户:{} 成功登陆!", userName);
         return new JsonResult(HttpStatus.OK.value(), HttpStatus.OK.name(),
                 new UserResult(jwtCode, TimeConstant.TIME_USER_SURVIVAL));
     }

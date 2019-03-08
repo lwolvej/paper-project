@@ -2,6 +2,7 @@ package org.duohuo.paper.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.duohuo.paper.annotation.RequestLimit;
 import org.duohuo.paper.model.result.JsonResult;
 import org.duohuo.paper.service.CaptchaService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class CaptchaController {
     @Resource(name = "captchaServiceImpl")
     private CaptchaService captchaService;
 
+    @RequestLimit(count = 20)
     @ApiOperation(value = "验证码获取")
     @GetMapping("/captcha")
     @ResponseBody

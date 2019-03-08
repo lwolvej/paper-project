@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.duohuo.paper.annotation.RequestLimit;
 import org.duohuo.paper.facade.BaseLineFacade;
 import org.duohuo.paper.model.dto.BaseLineSearchDto;
 import org.duohuo.paper.model.result.JsonResult;
@@ -21,6 +22,7 @@ public class BaseLineController {
     @Resource(name = "baseLineFacade")
     private BaseLineFacade baseLineFacade;
 
+    @RequestLimit(count = 20)
     @ApiOperation(value = "按学科查询基准线")
     @PostMapping(value = "/byCategory")
     @RequiresAuthentication
@@ -28,6 +30,7 @@ public class BaseLineController {
         return baseLineFacade.searchByCategoryList(baseLineSearchDto);
     }
 
+    @RequestLimit(count = 20)
     @ApiOperation(value = "查询基准线")
     @PostMapping(value = "/byAll")
     @RequiresAuthentication
@@ -38,7 +41,7 @@ public class BaseLineController {
     @ApiOperation(value = "基准线上传", notes = "基准线上传，上传一个excel")
     @PostMapping(value = "/upload")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
-    public JsonResult uploadBaseLineExcel(@RequestParam("file") MultipartFile file) throws Exception {
+    public JsonResult uploadBaseLineExcel(@RequestParam("file") MultipartFile file) {
         return baseLineFacade.uploadFacade(file);
     }
 }

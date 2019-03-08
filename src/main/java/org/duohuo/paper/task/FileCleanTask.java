@@ -22,8 +22,9 @@ public class FileCleanTask {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileCleanTask.class);
 
     //每天凌晨三点检查和jar同级的目录中是否还有zip文件，有则删除
-    @Scheduled(cron = "0 0 3 1/1 * ? *")
+    @Scheduled(cron = "0 0 3 1/1 * ?")
     public void zipFileClean() {
+        LOGGER.info("开始清理zip文件");
         String jarPath = ExcelUtil.getJarPath();
         File file = new File(jarPath);
         if (file.isDirectory()) {
@@ -47,8 +48,9 @@ public class FileCleanTask {
     }
 
     //每天五点检查jar同级目录下临时文件夹是否还存在，存在则删除
-    @Scheduled(cron = "0 0 5 1/1 * ? *")
+    @Scheduled(cron = "0 0 5 1/1 * ?")
     public void tempFolderDelete() {
+        LOGGER.info("开始清理临时文件夹");
         String jarPath = ExcelUtil.getJarPath();
         File file = new File(jarPath);
         if (file.isDirectory()) {

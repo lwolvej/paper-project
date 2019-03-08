@@ -54,7 +54,7 @@ public class JournalExcelServiceImpl implements JournalExcelService {
         journalManager.deleteAllByTime(year, month);
         List<Journal> journalList = new ArrayList<>();
         for (JournalExcelModel excelModel : excelModelList) {
-            String categoryName = excelModel.getCategoryName();
+            String categoryName = excelModel.getCategoryName().toUpperCase();
             if (!categoryMap.containsKey(categoryName)) {
                 throw new ExcelException("上传文件不规范,出现未知类别:" + categoryName);
             }
