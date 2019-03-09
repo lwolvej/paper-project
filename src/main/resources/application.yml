@@ -8,7 +8,6 @@ server:
   compression:
     enabled: true
 
-
 spring:
   data:
     redis:
