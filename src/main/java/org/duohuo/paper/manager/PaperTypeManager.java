@@ -82,46 +82,46 @@ public class PaperTypeManager {
         switch (type) {
             case 1: {
                 paperTypeList.add(0);
-                paperTypeList.add(4);
-                paperTypeList.add(5);
-                paperTypeList.add(6);
-                paperTypeList.add(10);
-                paperTypeList.add(11);
-                paperTypeList.add(12);
-                paperTypeList.add(14);
+//                paperTypeList.add(4);
+//                paperTypeList.add(5);
+//                paperTypeList.add(6);
+//                paperTypeList.add(10);
+//                paperTypeList.add(11);
+//                paperTypeList.add(12);
+//                paperTypeList.add(14);
             }
             break;
             case 2: {
                 paperTypeList.add(1);
-                paperTypeList.add(4);
-                paperTypeList.add(7);
-                paperTypeList.add(8);
-                paperTypeList.add(10);
-                paperTypeList.add(11);
-                paperTypeList.add(13);
-                paperTypeList.add(14);
+//                paperTypeList.add(4);
+//                paperTypeList.add(7);
+//                paperTypeList.add(8);
+//                paperTypeList.add(10);
+//                paperTypeList.add(11);
+//                paperTypeList.add(13);
+//                paperTypeList.add(14);
             }
             break;
             case 3: {
                 paperTypeList.add(2);
-                paperTypeList.add(5);
-                paperTypeList.add(7);
-                paperTypeList.add(9);
-                paperTypeList.add(10);
-                paperTypeList.add(12);
-                paperTypeList.add(13);
-                paperTypeList.add(14);
+//                paperTypeList.add(5);
+//                paperTypeList.add(7);
+//                paperTypeList.add(9);
+//                paperTypeList.add(10);
+//                paperTypeList.add(12);
+//                paperTypeList.add(13);
+//                paperTypeList.add(14);
             }
             break;
             case 4: {
                 paperTypeList.add(3);
-                paperTypeList.add(6);
-                paperTypeList.add(8);
-                paperTypeList.add(9);
-                paperTypeList.add(11);
-                paperTypeList.add(12);
-                paperTypeList.add(13);
-                paperTypeList.add(14);
+//                paperTypeList.add(6);
+//                paperTypeList.add(8);
+//                paperTypeList.add(9);
+//                paperTypeList.add(11);
+//                paperTypeList.add(12);
+//                paperTypeList.add(13);
+//                paperTypeList.add(14);
             }
             break;
         }

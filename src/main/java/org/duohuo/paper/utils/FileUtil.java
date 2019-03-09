@@ -7,8 +7,6 @@ import org.duohuo.paper.exceptions.ZipFileException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.zip.ZipOutputStream;
 
 public final class FileUtil {
 
@@ -38,15 +36,15 @@ public final class FileUtil {
 //    }
 
 
-    public static byte[] createZipWithOutPutStreams(final Map<String, byte[]> fileMap) {
-        ZipOutputStream zipOutputStream;
-        for (Map.Entry<String, byte[]> file : fileMap.entrySet()) {
-            InputStream inputStream = new ByteArrayInputStream(file.getValue());
-
-        }
-
-        return null;
-    }
+//    public static byte[] createZipWithOutPutStreams(final Map<String, byte[]> fileMap) {
+//        ZipOutputStream zipOutputStream;
+//        for (Map.Entry<String, byte[]> file : fileMap.entrySet()) {
+//            InputStream inputStream = new ByteArrayInputStream(file.getValue());
+//
+//        }
+//
+//        return null;
+//    }
 
     public static void fileDelete(final String filePath) {
         File file = new File(filePath);
@@ -54,16 +52,16 @@ public final class FileUtil {
             fileDelete(file);
         }
     }
-
-    //删除临时文件
-    public static void fileDelete(final List<String> filePaths, final String targetPath) {
-        for (String path : filePaths) {
-            File file = new File(targetPath + path);
-            if (file.isDirectory()) {
-                fileDelete(file);
-            }
-        }
-    }
+//
+//    //删除临时文件
+//    public static void fileDelete(final List<String> filePaths, final String targetPath) {
+//        for (String path : filePaths) {
+//            File file = new File(targetPath + path);
+//            if (file.isDirectory()) {
+//                fileDelete(file);
+//            }
+//        }
+//    }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private static void fileDelete(final File directFile) {

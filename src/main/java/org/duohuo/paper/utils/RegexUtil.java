@@ -13,10 +13,10 @@ public final class RegexUtil {
     public static Boolean numberRegex(String number) {
         return validation(RegexConstant.NUMBER_REGEX, number);
     }
-
-    public static Boolean letterRegex(String letter) {
-        return validation(RegexConstant.LETTER_REGEX, letter);
-    }
+//
+//    public static Boolean letterRegex(String letter) {
+//        return validation(RegexConstant.LETTER_REGEX, letter);
+//    }
 
     public static Boolean imageRegex(String imageName) {
         return validation(RegexConstant.FILE_IMAGE_REGEX, imageName);

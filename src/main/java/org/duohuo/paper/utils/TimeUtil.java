@@ -1,7 +1,5 @@
 package org.duohuo.paper.utils;
 
-import org.duohuo.paper.exceptions.NotFoundException;
-
 public final class TimeUtil {
 
     private TimeUtil() {

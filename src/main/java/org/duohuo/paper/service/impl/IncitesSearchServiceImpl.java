@@ -60,7 +60,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
                     }
                     BaseLine baseLine = optional.get();
                     double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue() * 1.0);
-                    value = ((int) value * 100) / 100.0;
+                    value = (((int) value * 100) * 1.0) / 100.0;
                     excelModelList.add(IncitesConverter.convertIncitesToDownload(incites, value));
                 }
             }
@@ -159,7 +159,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
                         throw new NotFoundException("基准线无法找到对应实体");
                     }
                     double value = (incites.getCitedTimes() * 1.0) / (optional.get().getValue() * 1.0);
-                    value = ((int) value * 100) / 100.0;
+                    value = (((int) value * 100) * 1.0) / 100.0;
                     resultList.add(IncitesConverter.convertIncitesToResult(incites, value, ++num));
                 }
             }

@@ -1,7 +1,6 @@
 package org.duohuo.paper.repository;
 
 import org.duohuo.paper.model.Journal;
-import org.duohuo.paper.model.Time;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -45,11 +44,11 @@ public interface JournalRepository extends JpaRepository<Journal, Long> {
 
     List<Journal> findAllByCategory_CategoryIdInAndTime_TimeIdIn(List<Integer> categoryIdList, List<Integer> timeIdList);
 
-    void deleteAllByTime_TimeIdIn(List<Integer> timeIdList);
+//    void deleteAllByTime_TimeIdIn(List<Integer> timeIdList);
 
-    Boolean existsByTime(Time time);
+//    Boolean existsByTime(Time time);
 
-    void deleteAllByTime(Time time);
+//    void deleteAllByTime(Time time);
 
     void deleteAllByTime_TimeId(Integer timeId);
 }

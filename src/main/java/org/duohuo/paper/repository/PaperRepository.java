@@ -65,14 +65,14 @@ public interface PaperRepository extends JpaRepository<Paper, Long> {
     @Query(value = "SELECT * FROM paper_info WHERE MATCH (article_name)AGAINST(?1) AND category_id IN (?2) AND time_id IN (?3) AND paper_type IN (?4)", nativeQuery = true)
     Page<Paper> findAllByKeyWordAndCategory_CategoryIdInAndTime_TimeIdInAndPaperTypeIn(String keyWord, List<Integer> categoryIdList, List<Integer> timeIdList, List<Integer> paperTypeList, Pageable pageable);
 
-    Boolean existsByAccessionNumber(String accessionNumber);
+//    Boolean existsByAccessionNumber(String accessionNumber);
 
     Optional<Paper> findByAccessionNumberAndTimeAndPaperType(String accessionNumber, Time time, PaperType paperType);
 
-    void deleteAllByTime_TimeIdInAndPaperTypeIn(List<Integer> timeIdList, List<PaperType> paperTypeList);
+//    void deleteAllByTime_TimeIdInAndPaperTypeIn(List<Integer> timeIdList, List<PaperType> paperTypeList);
 
-    @Query(value = "SELECT * FROM paper_info WHERE MATCH (article_name)AGAINST(?1)", nativeQuery = true)
-    List<Paper> findAllByKeyWord(String keyWord);
+//    @Query(value = "SELECT * FROM paper_info WHERE MATCH (article_name)AGAINST(?1)", nativeQuery = true)
+//    List<Paper> findAllByKeyWord(String keyWord);
 
     List<Paper> findAllByPaperIdIn(List<Long> paperIdList);
 

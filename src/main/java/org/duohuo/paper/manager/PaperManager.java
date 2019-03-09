@@ -71,11 +71,11 @@ public class PaperManager {
 
 
     public Optional<Paper> findMaxTimeSchoolHotDataByAccessionNumber(final String accessionNumber) {
-        return paperRepository.findMaxTimeDataByAccessionNumberPaperType(accessionNumber, 4);
+        return paperRepository.findMaxTimeDataByAccessionNumberPaperType(accessionNumber, 3);
     }
 
     public Optional<Paper> findMaxTimeSchoolHighDataByAccessionNumber(final String accessionNumber) {
-        return paperRepository.findMaxTimeDataByAccessionNumberPaperType(accessionNumber, 3);
+        return paperRepository.findMaxTimeDataByAccessionNumberPaperType(accessionNumber, 2);
     }
 
     @Cacheable(value = "paper_find_page_category_list", keyGenerator = "redisKeyGenerator")
