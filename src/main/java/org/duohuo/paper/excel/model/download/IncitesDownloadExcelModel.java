@@ -10,7 +10,7 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
 
     private static final long serialVersionUID = -8322970178849489286L;
 
-    @ExcelProperty(index = 0, value = "索取号")
+    @ExcelProperty(index = 0, value = "索引号")
     private String accessionNumber;
 
     @ExcelProperty(index = 1, value = "DOI")
@@ -49,25 +49,25 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
     @ExcelProperty(index = 12, value = "被引频次")
     private Integer citedTimes;
 
-    @ExcelProperty(index = 12, value = "期刊预期被引频次")
+    @ExcelProperty(index = 13, value = "期刊预期被引频次")
     private String journalExpectCitedTimes;
 
-    @ExcelProperty(index = 13, value = "类别预期被引频次")
+    @ExcelProperty(index = 14, value = "类别预期被引频次")
     private String subjectExpectCitedTimes;
 
-    @ExcelProperty(index = 14, value = "期刊规范化的引文影响力")
+    @ExcelProperty(index = 15, value = "期刊规范化的引文影响力")
     private String journalInfluence;
 
-    @ExcelProperty(index = 15, value = "学科规范化的引文影响力")
+    @ExcelProperty(index = 16, value = "学科规范化的引文影响力")
     private String subjectInfluence;
 
-    @ExcelProperty(index = 16, value = "学科领域百分位")
+    @ExcelProperty(index = 17, value = "学科领域百分位")
     private String subjectAreaPercentile;
 
-    @ExcelProperty(index = 17, value = "期刊影响因子")
+    @ExcelProperty(index = 18, value = "期刊影响因子")
     private String journalImpactFactor;
 
-    @ExcelProperty(index = 18, value = "卷")
+    @ExcelProperty(index = 19, value = "被引频次/基准线")
     private String value;
 
     public IncitesDownloadExcelModel() {

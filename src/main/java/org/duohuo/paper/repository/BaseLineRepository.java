@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository("baseLineRepository")
 public interface BaseLineRepository extends JpaRepository<BaseLine, String> {
@@ -18,6 +19,5 @@ public interface BaseLineRepository extends JpaRepository<BaseLine, String> {
 
     void deleteAllByYearLessThan(final String year);
 
-    @Query(value = "SELECT * FROM base_line_info WHERE category_id=(?1) AND percent=(?2) AND year = (SELECT MAX(year) FROM base_line_info)", nativeQuery = true)
-    BaseLine findByCategory_CategoryIdAndPercentAndYear(final Integer categoryId, final String percent);
+    Optional<BaseLine> findByCategory_CategoryIdAndPercentAndYear(final Integer categoryId, final String percent, final String year);
 }

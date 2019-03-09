@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Component("baseLineManager")
 public class BaseLineManager {
@@ -26,9 +27,8 @@ public class BaseLineManager {
         }
     }
 
-    @Cacheable(value = "base_line_find_category_and_percent_and_year", keyGenerator = "redisKeyGenerator")
-    public BaseLine findByCategoryAndPercentAndYear(final Category category) {
-        return baseLineRepository.findByCategory_CategoryIdAndPercentAndYear(category.getCategoryId(), "1.00%");
+    public Optional<BaseLine> findByCategoryAndPercentAndYear(final Category category, final String year) {
+        return baseLineRepository.findByCategory_CategoryIdAndPercentAndYear(category.getCategoryId(), "1.00%", year);
     }
 
     @Cacheable(value = "base_line_find_category_list", keyGenerator = "redisKeyGenerator")

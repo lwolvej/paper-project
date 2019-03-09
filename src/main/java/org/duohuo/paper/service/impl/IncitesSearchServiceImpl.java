@@ -2,6 +2,7 @@ package org.duohuo.paper.service.impl;
 
 import com.alibaba.excel.metadata.BaseRowModel;
 import org.duohuo.paper.convert.IncitesConverter;
+import org.duohuo.paper.exceptions.NotFoundException;
 import org.duohuo.paper.manager.*;
 import org.duohuo.paper.model.*;
 import org.duohuo.paper.model.result.IncitesResult;
@@ -53,8 +54,13 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
                 if (highly.isPresent()) {
                     excelModelList.add(IncitesConverter.convertIncitesToDownload(incites));
                 } else {
-                    BaseLine baseLine = baseLineManager.findByCategoryAndPercentAndYear(incites.getCategory());
+                    Optional<BaseLine> optional = baseLineManager.findByCategoryAndPercentAndYear(incites.getCategory(), Integer.toString(incites.getPublicationDate()));
+                    if (!optional.isPresent()) {
+                        throw new NotFoundException("基准线找不到对应年份");
+                    }
+                    BaseLine baseLine = optional.get();
                     double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue() * 1.0);
+                    value = ((int) value * 100) / 100.0;
                     excelModelList.add(IncitesConverter.convertIncitesToDownload(incites, value));
                 }
             }
@@ -148,8 +154,12 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
                 if (highly.isPresent()) {
                     resultList.add(IncitesConverter.convertIncitesToResult(incites, 2, ++num));
                 } else {
-                    BaseLine baseLine = baseLineManager.findByCategoryAndPercentAndYear(incites.getCategory());
-                    double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue() * 1.0);
+                    Optional<BaseLine> optional = baseLineManager.findByCategoryAndPercentAndYear(incites.getCategory(), Integer.toString(incites.getPublicationDate()));
+                    if (!optional.isPresent()) {
+                        throw new NotFoundException("基准线无法找到对应实体");
+                    }
+                    double value = (incites.getCitedTimes() * 1.0) / (optional.get().getValue() * 1.0);
+                    value = ((int) value * 100) / 100.0;
                     resultList.add(IncitesConverter.convertIncitesToResult(incites, value, ++num));
                 }
             }

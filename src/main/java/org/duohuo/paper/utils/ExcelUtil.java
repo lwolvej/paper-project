@@ -51,7 +51,7 @@ public final class ExcelUtil {
     }
 
     private static Sheet createIncitesSheet() {
-        Sheet sheet = new Sheet(1, 19, IncitesDownloadExcelModel.class);
+        Sheet sheet = new Sheet(1, 20, IncitesDownloadExcelModel.class);
         sheet.setSheetName("sheet1");
         sheet.setTableStyle(createTableStyle());
         sheet.setAutoWidth(true);
