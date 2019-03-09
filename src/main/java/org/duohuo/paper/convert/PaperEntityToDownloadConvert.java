@@ -27,6 +27,7 @@ class PaperEntityToDownloadConvert extends Converter<PaperExcelDownloadModel, Pa
             excelModel.setAddress(paper.getAddresses());
             excelModel.setInstitutions(paper.getInstitutions());
             excelModel.setPublicationDate(paper.getPublicationDate());
+            excelModel.setAuthors(paper.getAuthors());
             Time time = paper.getTime();
             excelModel.setTime(time.getYear() + "/" + time.getMonth());
             return excelModel;

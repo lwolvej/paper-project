@@ -22,7 +22,6 @@ public class IncitesManager {
     @Resource(name = "incitesRepository")
     private IncitesRepository incitesRepository;
 
-    @Cacheable(value = "incites_find_accessionNumber", keyGenerator = "redisKeyGenerator")
     public Optional<Incites> findByAccessionNumber(final String accessionNumber) {
         return incitesRepository.findByAccessionNumber(accessionNumber);
     }
@@ -43,7 +42,6 @@ public class IncitesManager {
         return newIncitesIdList;
     }
 
-    @Cacheable(value = "incites_find_id_list", keyGenerator = "redisKeyGenerator")
     public List<Incites> findAllByIdList(final List<Integer> incitesIdList) {
         return incitesRepository.findAllByIncitesIdIn(incitesIdList);
     }

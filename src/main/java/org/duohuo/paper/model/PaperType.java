@@ -15,18 +15,18 @@ public enum PaperType {
     HC_PAPER(0),
     HOT_PAPER(1),
     SHC_PAPER(2),
-    SHOT_PAPER(3),
-    HC_HOT_PAPER(4),
-    HC_SHC_PAPER(5),
-    HC_SHOT_PAPER(6),
-    HOT_SHC_PAPER(7),
-    HOT_SHOT_PAPER(8),
-    SHC_SHOT_PAPER(9),
-    HC_HOT_SHC_PAPER(10),
-    HC_HOT_SHOT_PAPER(11),
-    HC_SHC_SHOT_PAPER(12),
-    HOT_SHC_SHOT_PAPER(13),
-    ALL_PAPER(14);
+    SHOT_PAPER(3);
+//    HC_HOT_PAPER(4),
+//    HC_SHC_PAPER(5),
+//    HC_SHOT_PAPER(6),
+//    HOT_SHC_PAPER(7),
+//    HOT_SHOT_PAPER(8),
+//    SHC_SHOT_PAPER(9),
+//    HC_HOT_SHC_PAPER(10),
+//    HC_HOT_SHOT_PAPER(11),
+//    HC_SHC_SHOT_PAPER(12),
+//    HOT_SHC_SHOT_PAPER(13),
+//    ALL_PAPER(14);
 
     private Integer value;
 

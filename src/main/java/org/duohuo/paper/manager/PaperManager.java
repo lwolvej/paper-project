@@ -6,6 +6,7 @@ import org.duohuo.paper.model.PaperType;
 import org.duohuo.paper.model.Time;
 import org.duohuo.paper.repository.PaperRepository;
 import org.duohuo.paper.utils.ObjectUtil;
+import org.duohuo.paper.utils.TimeUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,12 +45,23 @@ public class PaperManager {
         paperRepository.saveAll(paperList);
     }
 
-    public Optional<Paper> findByAccessionNumberAndTime(final String accessionNumber, final Time time) {
-        return paperRepository.findByAccessionNumberAndTime(accessionNumber, time);
+    public Optional<Paper> findByAccessionNumberAndTimeAndPaperType(final String accessionNumber, final Time time, final PaperType paperType) {
+        return paperRepository.findByAccessionNumberAndTimeAndPaperType(accessionNumber, time, paperType);
     }
 
-    public void deleteByYearAndMonth(final Time time, final List<PaperType> paperTypeList) {
-        paperRepository.deleteAllByTimeAndPaperTypeIn(time, paperTypeList);
+    public void deleteByPaperIdList(final List<Long> paperIdList) {
+        paperRepository.deleteAllByPaperIdIn(paperIdList);
+    }
+
+    public List<Long> findIdListByTimeAndPaperType(final Integer year, final Integer month, final PaperType paperType) {
+        Time time = new Time();
+        time.setYear(year);
+        time.setMonth(month);
+        time.setTimeId(TimeUtil.createTimeIdByYearAndMonth(year, month));
+        return paperRepository.findAllByTimeAndPaperType(time, paperType)
+                .stream()
+                .map(Paper::getPaperId)
+                .collect(Collectors.toList());
     }
 
     @Cacheable(value = "paper_find_id_list", keyGenerator = "redisKeyGenerator")
@@ -57,7 +69,6 @@ public class PaperManager {
         return paperRepository.findAllByPaperIdIn(idList);
     }
 
-    @Cacheable(value = "paper_find_max_time_data", keyGenerator = "redisKeyGenerator")
     public Optional<Paper> findMaxTimeDataByAccessionNumberPaperTypeList(final String accessionNumber, final List<Integer> schoolPaperTypeList) {
         return paperRepository.findMaxTimeDataByAccessionNumberPaperTypeIn(accessionNumber, schoolPaperTypeList);
     }

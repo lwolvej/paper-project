@@ -32,6 +32,7 @@ class IncitesExcelToEntityConvert extends Converter<Incites, IncitesExcelModel> 
             result.setSubjectAreaPercentile(incites.getSubjectAreaPercentile());
             result.setSubjectExpectCitedTimes(incites.getSubjectExpectCitedTimes());
             result.setVolume(incites.getVolume());
+            result.setCitedTimes(incites.getCitedTimes());
             return result;
         }
     }

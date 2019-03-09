@@ -33,46 +33,46 @@ public class PaperTypeManager {
         switch (type) {
             case 1: {
                 paperTypes.add(PaperType.HC_PAPER);
-                paperTypes.add(PaperType.HC_HOT_PAPER);
-                paperTypes.add(PaperType.HC_SHC_PAPER);
-                paperTypes.add(PaperType.HC_SHOT_PAPER);
-                paperTypes.add(PaperType.HC_HOT_SHC_PAPER);
-                paperTypes.add(PaperType.HC_HOT_SHOT_PAPER);
-                paperTypes.add(PaperType.HC_SHC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_HOT_PAPER);
+//                paperTypes.add(PaperType.HC_SHC_PAPER);
+//                paperTypes.add(PaperType.HC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_HOT_SHC_PAPER);
+//                paperTypes.add(PaperType.HC_HOT_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_SHC_SHOT_PAPER);
             }
             break;
             case 2: {
                 paperTypes.add(PaperType.HOT_PAPER);
-                paperTypes.add(PaperType.HC_HOT_PAPER);
-                paperTypes.add(PaperType.HOT_SHC_PAPER);
-                paperTypes.add(PaperType.HOT_SHOT_PAPER);
-                paperTypes.add(PaperType.HC_HOT_SHC_PAPER);
-                paperTypes.add(PaperType.HC_HOT_SHOT_PAPER);
-                paperTypes.add(PaperType.HOT_SHC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_HOT_PAPER);
+//                paperTypes.add(PaperType.HOT_SHC_PAPER);
+//                paperTypes.add(PaperType.HOT_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_HOT_SHC_PAPER);
+//                paperTypes.add(PaperType.HC_HOT_SHOT_PAPER);
+//                paperTypes.add(PaperType.HOT_SHC_SHOT_PAPER);
             }
             break;
             case 3: {
                 paperTypes.add(PaperType.SHC_PAPER);
-                paperTypes.add(PaperType.HC_SHC_PAPER);
-                paperTypes.add(PaperType.HOT_SHC_PAPER);
-                paperTypes.add(PaperType.SHC_SHOT_PAPER);
-                paperTypes.add(PaperType.HC_HOT_SHC_PAPER);
-                paperTypes.add(PaperType.HOT_SHC_SHOT_PAPER);
-                paperTypes.add(PaperType.HC_SHC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_SHC_PAPER);
+//                paperTypes.add(PaperType.HOT_SHC_PAPER);
+//                paperTypes.add(PaperType.SHC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_HOT_SHC_PAPER);
+//                paperTypes.add(PaperType.HOT_SHC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_SHC_SHOT_PAPER);
             }
             break;
             case 4: {
                 paperTypes.add(PaperType.SHOT_PAPER);
-                paperTypes.add(PaperType.HC_SHOT_PAPER);
-                paperTypes.add(PaperType.HOT_SHOT_PAPER);
-                paperTypes.add(PaperType.SHC_SHOT_PAPER);
-                paperTypes.add(PaperType.HC_HOT_SHOT_PAPER);
-                paperTypes.add(PaperType.HC_SHC_SHOT_PAPER);
-                paperTypes.add(PaperType.HOT_SHC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HOT_SHOT_PAPER);
+//                paperTypes.add(PaperType.SHC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_HOT_SHOT_PAPER);
+//                paperTypes.add(PaperType.HC_SHC_SHOT_PAPER);
+//                paperTypes.add(PaperType.HOT_SHC_SHOT_PAPER);
             }
             break;
         }
-        paperTypes.add(PaperType.ALL_PAPER);
+//        paperTypes.add(PaperType.ALL_PAPER);
         return paperTypes;
     }
 
@@ -128,148 +128,148 @@ public class PaperTypeManager {
         return paperTypeList;
     }
 
-    public PaperType changePaperType(Integer newType, PaperType originType) {
-        switch (newType) {
-            case 1: {
-                switch (originType) {
-                    case HC_PAPER:
-                        return PaperType.HC_PAPER;
-                    case HOT_PAPER:
-                        return PaperType.HC_HOT_PAPER;
-                    case SHC_PAPER:
-                        return PaperType.HC_SHC_PAPER;
-                    case SHOT_PAPER:
-                        return PaperType.HC_SHOT_PAPER;
-                    case HC_HOT_PAPER:
-                        return PaperType.HC_HOT_PAPER;
-                    case HC_SHC_PAPER:
-                        return PaperType.HC_SHC_PAPER;
-                    case HC_SHOT_PAPER:
-                        return PaperType.HC_SHOT_PAPER;
-                    case HOT_SHC_PAPER:
-                        return PaperType.HC_HOT_SHC_PAPER;
-                    case HOT_SHOT_PAPER:
-                        return PaperType.HC_HOT_SHOT_PAPER;
-                    case SHC_SHOT_PAPER:
-                        return PaperType.HC_SHC_SHOT_PAPER;
-                    case HC_HOT_SHC_PAPER:
-                        return PaperType.HC_HOT_SHC_PAPER;
-                    case HC_HOT_SHOT_PAPER:
-                        return PaperType.HC_HOT_SHOT_PAPER;
-                    case HC_SHC_SHOT_PAPER:
-                        return PaperType.HC_SHC_SHOT_PAPER;
-                    case HOT_SHC_SHOT_PAPER:
-                        return PaperType.ALL_PAPER;
-                    case ALL_PAPER:
-                        return PaperType.ALL_PAPER;
-                }
-            }
-            case 2: {
-                switch (originType) {
-                    case HC_PAPER:
-                        return PaperType.HC_HOT_PAPER;
-                    case HOT_PAPER:
-                        return PaperType.HOT_PAPER;
-                    case SHC_PAPER:
-                        return PaperType.HOT_SHC_PAPER;
-                    case SHOT_PAPER:
-                        return PaperType.HOT_SHOT_PAPER;
-                    case HC_HOT_PAPER:
-                        return PaperType.HC_HOT_PAPER;
-                    case HC_SHC_PAPER:
-                        return PaperType.HC_HOT_SHC_PAPER;
-                    case HC_SHOT_PAPER:
-                        return PaperType.HOT_SHOT_PAPER;
-                    case HOT_SHC_PAPER:
-                        return PaperType.HOT_SHC_PAPER;
-                    case HOT_SHOT_PAPER:
-                        return PaperType.HOT_SHOT_PAPER;
-                    case SHC_SHOT_PAPER:
-                        return PaperType.HOT_SHC_SHOT_PAPER;
-                    case HC_HOT_SHC_PAPER:
-                        return PaperType.HC_HOT_SHC_PAPER;
-                    case HC_HOT_SHOT_PAPER:
-                        return PaperType.HC_HOT_SHOT_PAPER;
-                    case HC_SHC_SHOT_PAPER:
-                        return PaperType.ALL_PAPER;
-                    case HOT_SHC_SHOT_PAPER:
-                        return PaperType.HOT_SHC_SHOT_PAPER;
-                    case ALL_PAPER:
-                        return PaperType.ALL_PAPER;
-                }
-            }
-            case 3: {
-                switch (originType) {
-                    case HC_PAPER:
-                        return PaperType.HC_SHC_PAPER;
-                    case HOT_PAPER:
-                        return PaperType.HOT_SHC_PAPER;
-                    case SHC_PAPER:
-                        return PaperType.SHC_PAPER;
-                    case SHOT_PAPER:
-                        return PaperType.SHC_SHOT_PAPER;
-                    case HC_HOT_PAPER:
-                        return PaperType.HC_HOT_SHC_PAPER;
-                    case HC_SHC_PAPER:
-                        return PaperType.HC_SHC_PAPER;
-                    case HC_SHOT_PAPER:
-                        return PaperType.HC_SHC_SHOT_PAPER;
-                    case HOT_SHC_PAPER:
-                        return PaperType.HOT_SHC_PAPER;
-                    case HOT_SHOT_PAPER:
-                        return PaperType.HOT_SHC_SHOT_PAPER;
-                    case SHC_SHOT_PAPER:
-                        return PaperType.SHC_SHOT_PAPER;
-                    case HC_HOT_SHC_PAPER:
-                        return PaperType.HC_HOT_SHC_PAPER;
-                    case HC_HOT_SHOT_PAPER:
-                        return PaperType.ALL_PAPER;
-                    case HC_SHC_SHOT_PAPER:
-                        return PaperType.HC_SHC_SHOT_PAPER;
-                    case HOT_SHC_SHOT_PAPER:
-                        return PaperType.HOT_SHC_SHOT_PAPER;
-                    case ALL_PAPER:
-                        return PaperType.ALL_PAPER;
-                }
-            }
-            case 4: {
-                switch (originType) {
-                    case HC_PAPER:
-                        return PaperType.HC_SHOT_PAPER;
-                    case HOT_PAPER:
-                        return PaperType.HOT_SHOT_PAPER;
-                    case SHC_PAPER:
-                        return PaperType.SHC_SHOT_PAPER;
-                    case SHOT_PAPER:
-                        return PaperType.SHOT_PAPER;
-                    case HC_HOT_PAPER:
-                        return PaperType.HC_HOT_SHOT_PAPER;
-                    case HC_SHC_PAPER:
-                        return PaperType.HC_SHC_SHOT_PAPER;
-                    case HC_SHOT_PAPER:
-                        return PaperType.HC_SHOT_PAPER;
-                    case HOT_SHC_PAPER:
-                        return PaperType.HOT_SHC_SHOT_PAPER;
-                    case HOT_SHOT_PAPER:
-                        return PaperType.HOT_SHOT_PAPER;
-                    case SHC_SHOT_PAPER:
-                        return PaperType.SHC_SHOT_PAPER;
-                    case HC_HOT_SHC_PAPER:
-                        return PaperType.ALL_PAPER;
-                    case HC_HOT_SHOT_PAPER:
-                        return PaperType.HC_HOT_SHOT_PAPER;
-                    case HC_SHC_SHOT_PAPER:
-                        return PaperType.HC_SHC_SHOT_PAPER;
-                    case HOT_SHC_SHOT_PAPER:
-                        return PaperType.HOT_SHC_SHOT_PAPER;
-                    case ALL_PAPER:
-                        return PaperType.ALL_PAPER;
-                }
-            }
-            default:
-                throw new RuntimeException();
-        }
-    }
+//    public PaperType changePaperType(Integer newType, PaperType originType) {
+//        switch (newType) {
+//            case 1: {
+//                switch (originType) {
+//                    case HC_PAPER:
+//                        return PaperType.HC_PAPER;
+//                    case HOT_PAPER:
+//                        return PaperType.HC_HOT_PAPER;
+//                    case SHC_PAPER:
+//                        return PaperType.HC_SHC_PAPER;
+//                    case SHOT_PAPER:
+//                        return PaperType.HC_SHOT_PAPER;
+//                    case HC_HOT_PAPER:
+//                        return PaperType.HC_HOT_PAPER;
+//                    case HC_SHC_PAPER:
+//                        return PaperType.HC_SHC_PAPER;
+//                    case HC_SHOT_PAPER:
+//                        return PaperType.HC_SHOT_PAPER;
+//                    case HOT_SHC_PAPER:
+//                        return PaperType.HC_HOT_SHC_PAPER;
+//                    case HOT_SHOT_PAPER:
+//                        return PaperType.HC_HOT_SHOT_PAPER;
+//                    case SHC_SHOT_PAPER:
+//                        return PaperType.HC_SHC_SHOT_PAPER;
+//                    case HC_HOT_SHC_PAPER:
+//                        return PaperType.HC_HOT_SHC_PAPER;
+//                    case HC_HOT_SHOT_PAPER:
+//                        return PaperType.HC_HOT_SHOT_PAPER;
+//                    case HC_SHC_SHOT_PAPER:
+//                        return PaperType.HC_SHC_SHOT_PAPER;
+//                    case HOT_SHC_SHOT_PAPER:
+//                        return PaperType.ALL_PAPER;
+//                    case ALL_PAPER:
+//                        return PaperType.ALL_PAPER;
+//                }
+//            }
+//            case 2: {
+//                switch (originType) {
+//                    case HC_PAPER:
+//                        return PaperType.HC_HOT_PAPER;
+//                    case HOT_PAPER:
+//                        return PaperType.HOT_PAPER;
+//                    case SHC_PAPER:
+//                        return PaperType.HOT_SHC_PAPER;
+//                    case SHOT_PAPER:
+//                        return PaperType.HOT_SHOT_PAPER;
+//                    case HC_HOT_PAPER:
+//                        return PaperType.HC_HOT_PAPER;
+//                    case HC_SHC_PAPER:
+//                        return PaperType.HC_HOT_SHC_PAPER;
+//                    case HC_SHOT_PAPER:
+//                        return PaperType.HOT_SHOT_PAPER;
+//                    case HOT_SHC_PAPER:
+//                        return PaperType.HOT_SHC_PAPER;
+//                    case HOT_SHOT_PAPER:
+//                        return PaperType.HOT_SHOT_PAPER;
+//                    case SHC_SHOT_PAPER:
+//                        return PaperType.HOT_SHC_SHOT_PAPER;
+//                    case HC_HOT_SHC_PAPER:
+//                        return PaperType.HC_HOT_SHC_PAPER;
+//                    case HC_HOT_SHOT_PAPER:
+//                        return PaperType.HC_HOT_SHOT_PAPER;
+//                    case HC_SHC_SHOT_PAPER:
+//                        return PaperType.ALL_PAPER;
+//                    case HOT_SHC_SHOT_PAPER:
+//                        return PaperType.HOT_SHC_SHOT_PAPER;
+//                    case ALL_PAPER:
+//                        return PaperType.ALL_PAPER;
+//                }
+//            }
+//            case 3: {
+//                switch (originType) {
+//                    case HC_PAPER:
+//                        return PaperType.HC_SHC_PAPER;
+//                    case HOT_PAPER:
+//                        return PaperType.HOT_SHC_PAPER;
+//                    case SHC_PAPER:
+//                        return PaperType.SHC_PAPER;
+//                    case SHOT_PAPER:
+//                        return PaperType.SHC_SHOT_PAPER;
+//                    case HC_HOT_PAPER:
+//                        return PaperType.HC_HOT_SHC_PAPER;
+//                    case HC_SHC_PAPER:
+//                        return PaperType.HC_SHC_PAPER;
+//                    case HC_SHOT_PAPER:
+//                        return PaperType.HC_SHC_SHOT_PAPER;
+//                    case HOT_SHC_PAPER:
+//                        return PaperType.HOT_SHC_PAPER;
+//                    case HOT_SHOT_PAPER:
+//                        return PaperType.HOT_SHC_SHOT_PAPER;
+//                    case SHC_SHOT_PAPER:
+//                        return PaperType.SHC_SHOT_PAPER;
+//                    case HC_HOT_SHC_PAPER:
+//                        return PaperType.HC_HOT_SHC_PAPER;
+//                    case HC_HOT_SHOT_PAPER:
+//                        return PaperType.ALL_PAPER;
+//                    case HC_SHC_SHOT_PAPER:
+//                        return PaperType.HC_SHC_SHOT_PAPER;
+//                    case HOT_SHC_SHOT_PAPER:
+//                        return PaperType.HOT_SHC_SHOT_PAPER;
+//                    case ALL_PAPER:
+//                        return PaperType.ALL_PAPER;
+//                }
+//            }
+//            case 4: {
+//                switch (originType) {
+//                    case HC_PAPER:
+//                        return PaperType.HC_SHOT_PAPER;
+//                    case HOT_PAPER:
+//                        return PaperType.HOT_SHOT_PAPER;
+//                    case SHC_PAPER:
+//                        return PaperType.SHC_SHOT_PAPER;
+//                    case SHOT_PAPER:
+//                        return PaperType.SHOT_PAPER;
+//                    case HC_HOT_PAPER:
+//                        return PaperType.HC_HOT_SHOT_PAPER;
+//                    case HC_SHC_PAPER:
+//                        return PaperType.HC_SHC_SHOT_PAPER;
+//                    case HC_SHOT_PAPER:
+//                        return PaperType.HC_SHOT_PAPER;
+//                    case HOT_SHC_PAPER:
+//                        return PaperType.HOT_SHC_SHOT_PAPER;
+//                    case HOT_SHOT_PAPER:
+//                        return PaperType.HOT_SHOT_PAPER;
+//                    case SHC_SHOT_PAPER:
+//                        return PaperType.SHC_SHOT_PAPER;
+//                    case HC_HOT_SHC_PAPER:
+//                        return PaperType.ALL_PAPER;
+//                    case HC_HOT_SHOT_PAPER:
+//                        return PaperType.HC_HOT_SHOT_PAPER;
+//                    case HC_SHC_SHOT_PAPER:
+//                        return PaperType.HC_SHC_SHOT_PAPER;
+//                    case HOT_SHC_SHOT_PAPER:
+//                        return PaperType.HOT_SHC_SHOT_PAPER;
+//                    case ALL_PAPER:
+//                        return PaperType.ALL_PAPER;
+//                }
+//            }
+//            default:
+//                throw new RuntimeException();
+//        }
+//    }
 
     public PaperType getPaperType(Integer newType) {
         switch (newType) {

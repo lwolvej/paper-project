@@ -26,7 +26,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("图书馆项目")
                 .description("项目接口")
-                .version("1.2.1")
+                .version("1.3.0")
                 .contact(new Contact("", "", ""))
                 .build();
     }
@@ -43,7 +43,7 @@ public class SwaggerConfig {
                 .build();
         list.add(builder.build());
         return new Docket(DocumentationType.SPRING_WEB)
-                .host("106.14.153.164:6374")
+                .host("139.196.89.107:6374")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("org.duohuo.paper"))
                 .paths(PathSelectors.any())

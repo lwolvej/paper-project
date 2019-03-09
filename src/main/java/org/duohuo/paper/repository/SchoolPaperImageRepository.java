@@ -10,4 +10,6 @@ import java.util.List;
 public interface SchoolPaperImageRepository extends JpaRepository<SchoolPaperImage, Integer> {
 
     List<SchoolPaperImage> findAllByPaperIdIn(List<Long> paperIdList);
+
+    void deleteAllByPaperIdIn(final List<Long> paperId);
 }

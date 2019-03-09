@@ -16,7 +16,7 @@ public class PaperExcelListener extends AnalysisEventListener<PaperExcelModel> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PaperExcelListener.class);
 
-    private Vector<PaperExcelModel> vector = new Vector<>(128);
+    private Vector<PaperExcelModel> vector = new Vector<>(256);
 
     @Override
     public void invoke(PaperExcelModel paperExcelModel, AnalysisContext analysisContext) {

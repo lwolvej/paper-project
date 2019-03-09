@@ -67,7 +67,7 @@ public interface PaperRepository extends JpaRepository<Paper, Long> {
 
     Boolean existsByAccessionNumber(String accessionNumber);
 
-    Optional<Paper> findByAccessionNumberAndTime(String accessionNumber, Time time);
+    Optional<Paper> findByAccessionNumberAndTimeAndPaperType(String accessionNumber, Time time, PaperType paperType);
 
     void deleteAllByTime_TimeIdInAndPaperTypeIn(List<Integer> timeIdList, List<PaperType> paperTypeList);
 
@@ -79,5 +79,7 @@ public interface PaperRepository extends JpaRepository<Paper, Long> {
     @Query(value = "SELECT * FROM paper_info WHERE accession_number=(?1) AND paper_type IN (?2) AND time_id=(SELECT MAX(time_id) FROM paper_info)", nativeQuery = true)
     Optional<Paper> findMaxTimeDataByAccessionNumberPaperTypeIn(String accessionNumber, List<Integer> paperTypeList);
 
-    void deleteAllByTimeAndPaperTypeIn(final Time time, final List<PaperType> paperTypeList);
+    void deleteAllByPaperIdIn(final List<Long> paperIdList);
+
+    List<Paper> findAllByTimeAndPaperType(Time time, PaperType paperType);
 }

@@ -25,6 +25,10 @@ public class SchoolPaperImageManager {
         return imageList;
     }
 
+    public void deleteByPaperIdList(final List<Long> paperIdList) {
+        schoolPaperImageRepository.deleteAllByPaperIdIn(paperIdList);
+    }
+
     public void save(final byte[] data, final String fileName, final Long paperId) {
         SchoolPaperImage paperImage = new SchoolPaperImage();
         paperImage.setImageName(fileName);

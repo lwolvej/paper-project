@@ -54,6 +54,7 @@ public class ExcelManager {
         if (!ObjectUtil.ifNotNullCollection(excelModels)) {
             throw new ExcelException("检查excel中可用数据为空,文件名称:" + fileName);
         }
+        System.gc();
         return excelModels;
     }
 
@@ -70,6 +71,7 @@ public class ExcelManager {
         if (!ObjectUtil.ifNotNullCollection(baseLineList)) {
             throw new ExcelException("检查excel中可用数据为空,文件名称:" + fileName);
         }
+        System.gc();
         return baseLineList;
     }
 
@@ -86,6 +88,7 @@ public class ExcelManager {
         if (!ObjectUtil.ifNotNullCollection(incitesExcelModelList)) {
             throw new ExcelException("检查excel中可用数据为空,文件名称:" + fileName);
         }
+        System.gc();
         return incitesExcelModelList;
     }
 
@@ -102,6 +105,7 @@ public class ExcelManager {
         if (!ObjectUtil.ifNotNullCollection(excelModels)) {
             throw new ExcelException("检查excel中可用数据为空,文件名称:" + filePath);
         }
+        System.gc();
         return excelModels;
     }
 }
