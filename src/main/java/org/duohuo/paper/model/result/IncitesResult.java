@@ -31,6 +31,8 @@ public class IncitesResult implements Serializable {
 
     private Integer publicationDate;
 
+    private Integer citedTimes;
+
     private String journalExpectCitedTimes;
 
     private String subjectExpectCitedTimes;
@@ -45,9 +47,11 @@ public class IncitesResult implements Serializable {
 
     private String categoryName;
 
-    private Boolean valueExist;
+    private Integer valueType;
 
     private Double value;
+
+    private Integer elemNum;
 
     public IncitesResult() {
     }
@@ -204,20 +208,36 @@ public class IncitesResult implements Serializable {
         this.categoryName = categoryName;
     }
 
-    public Boolean getValueExist() {
-        return valueExist;
-    }
-
-    public void setValueExist(Boolean valueExist) {
-        this.valueExist = valueExist;
-    }
-
     public Double getValue() {
         return value;
     }
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public Integer getCitedTimes() {
+        return citedTimes;
+    }
+
+    public void setCitedTimes(Integer citedTimes) {
+        this.citedTimes = citedTimes;
+    }
+
+    public Integer getValueType() {
+        return valueType;
+    }
+
+    public void setValueType(Integer valueType) {
+        this.valueType = valueType;
+    }
+
+    public Integer getElemNum() {
+        return elemNum;
+    }
+
+    public void setElemNum(Integer elemNum) {
+        this.elemNum = elemNum;
     }
 
     @Override
@@ -237,6 +257,7 @@ public class IncitesResult implements Serializable {
                 Objects.equals(period, result.period) &&
                 Objects.equals(page, result.page) &&
                 Objects.equals(publicationDate, result.publicationDate) &&
+                Objects.equals(citedTimes, result.citedTimes) &&
                 Objects.equals(journalExpectCitedTimes, result.journalExpectCitedTimes) &&
                 Objects.equals(subjectExpectCitedTimes, result.subjectExpectCitedTimes) &&
                 Objects.equals(journalInfluence, result.journalInfluence) &&
@@ -244,13 +265,14 @@ public class IncitesResult implements Serializable {
                 Objects.equals(subjectAreaPercentile, result.subjectAreaPercentile) &&
                 Objects.equals(journalImpactFactor, result.journalImpactFactor) &&
                 Objects.equals(categoryName, result.categoryName) &&
-                Objects.equals(valueExist, result.valueExist) &&
-                Objects.equals(value, result.value);
+                Objects.equals(valueType, result.valueType) &&
+                Objects.equals(value, result.value) &&
+                Objects.equals(elemNum, result.elemNum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(incitesId, accessionNumber, doi, pmid, articleName, link, authors, sources, volume, period, page, publicationDate, journalExpectCitedTimes, subjectExpectCitedTimes, journalInfluence, subjectInfluence, subjectAreaPercentile, journalImpactFactor, categoryName, valueExist, value);
+        return Objects.hash(incitesId, accessionNumber, doi, pmid, articleName, link, authors, sources, volume, period, page, publicationDate, citedTimes, journalExpectCitedTimes, subjectExpectCitedTimes, journalInfluence, subjectInfluence, subjectAreaPercentile, journalImpactFactor, categoryName, valueType, value, elemNum);
     }
 
     @Override
@@ -268,15 +290,17 @@ public class IncitesResult implements Serializable {
                 ", period='" + period + '\'' +
                 ", page='" + page + '\'' +
                 ", publicationDate=" + publicationDate +
-                ", journalExpectCitedTimes=" + journalExpectCitedTimes +
-                ", subjectExpectCitedTimes=" + subjectExpectCitedTimes +
-                ", journalInfluence=" + journalInfluence +
-                ", subjectInfluence=" + subjectInfluence +
-                ", subjectAreaPercentile=" + subjectAreaPercentile +
+                ", citedTimes=" + citedTimes +
+                ", journalExpectCitedTimes='" + journalExpectCitedTimes + '\'' +
+                ", subjectExpectCitedTimes='" + subjectExpectCitedTimes + '\'' +
+                ", journalInfluence='" + journalInfluence + '\'' +
+                ", subjectInfluence='" + subjectInfluence + '\'' +
+                ", subjectAreaPercentile='" + subjectAreaPercentile + '\'' +
                 ", journalImpactFactor='" + journalImpactFactor + '\'' +
                 ", categoryName='" + categoryName + '\'' +
-                ", valueExist=" + valueExist +
+                ", valueType=" + valueType +
                 ", value=" + value +
+                ", elemNum=" + elemNum +
                 '}';
     }
 }

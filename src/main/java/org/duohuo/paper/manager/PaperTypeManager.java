@@ -10,22 +10,22 @@ import java.util.List;
 public class PaperTypeManager {
 
     //获取本校的信息类别
-    public List<Integer> createSchoolPaperType() {
-        List<Integer> paperTypes = new ArrayList<>();
-        paperTypes.add(2);
-        paperTypes.add(3);
-        paperTypes.add(5);
-        paperTypes.add(6);
-        paperTypes.add(7);
-        paperTypes.add(8);
-        paperTypes.add(9);
-        paperTypes.add(10);
-        paperTypes.add(11);
-        paperTypes.add(12);
-        paperTypes.add(13);
-        paperTypes.add(14);
-        return paperTypes;
-    }
+//    public List<Integer> createSchoolPaperType() {
+//        List<Integer> paperTypes = new ArrayList<>();
+//        paperTypes.add(2);
+//        paperTypes.add(3);
+//        paperTypes.add(5);
+//        paperTypes.add(6);
+//        paperTypes.add(7);
+//        paperTypes.add(8);
+//        paperTypes.add(9);
+//        paperTypes.add(10);
+//        paperTypes.add(11);
+//        paperTypes.add(12);
+//        paperTypes.add(13);
+//        paperTypes.add(14);
+//        return paperTypes;
+//    }
 
     //1.高被引，2.热点，3.本校高被引，4.本校热点
     public List<PaperType> createPaperType(Integer type) {

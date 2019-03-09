@@ -36,16 +36,18 @@ public final class IncitesConverter {
         return converterEntityToDownload.convertFromOrigin(incites);
     }
 
-    public synchronized static IncitesResult convertIncitesToResult(final Incites incites, final Double value) {
+    public synchronized static IncitesResult convertIncitesToResult(final Incites incites, final Double value, final Integer elemNum) {
         IncitesResult result = converterEntityToResult.convertFromOrigin(incites);
-        result.setValueExist(true);
+        result.setValueType(0);
         result.setValue(value);
+        result.setElemNum(elemNum);
         return result;
     }
 
-    public synchronized static IncitesResult convertIncitesToResult(final Incites incites) {
+    public synchronized static IncitesResult convertIncitesToResult(final Incites incites, final Integer valueType, final Integer elemNum) {
         IncitesResult result = converterEntityToResult.convertFromOrigin(incites);
-        result.setValueExist(false);
+        result.setValueType(valueType);
+        result.setElemNum(elemNum);
         return result;
     }
 }

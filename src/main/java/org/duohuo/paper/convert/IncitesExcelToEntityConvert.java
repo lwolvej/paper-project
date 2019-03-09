@@ -15,24 +15,24 @@ class IncitesExcelToEntityConvert extends Converter<Incites, IncitesExcelModel> 
         @Override
         public Incites apply(IncitesExcelModel incites) {
             Incites result = new Incites();
-            result.setAccessionNumber(incites.getAccessionNumber());
-            result.setArticleName(incites.getArticleName());
+            result.setAccessionNumber(incites.getAccessionNumber());//1
+            result.setArticleName(incites.getArticleName());//3
             result.setJournalExpectCitedTimes(incites.getJournalExpectCitedTimes());
             result.setJournalImpactFactor(incites.getJournalImpactFactor());
-            result.setPeriod(incites.getPeriod());
+            result.setPeriod(incites.getPeriod());//7
             result.setPmid(incites.getPmid());
-            result.setPublicationDate(incites.getPublicationDate());
-            result.setSources(incites.getSources());
+            result.setPublicationDate(incites.getPublicationDate());//9
+            result.setSources(incites.getSources());//5
             result.setSubjectInfluence(incites.getSubjectInfluence());
             result.setAuthors(incites.getAuthors());
-            result.setDoi(incites.getDoi());
+            result.setDoi(incites.getDoi());//2
             result.setJournalInfluence(incites.getJournalInfluence());
-            result.setLink(incites.getLink());
-            result.setPage(incites.getPage());
+            result.setLink(incites.getLink());//4
+            result.setPage(incites.getPage());//8
             result.setSubjectAreaPercentile(incites.getSubjectAreaPercentile());
             result.setSubjectExpectCitedTimes(incites.getSubjectExpectCitedTimes());
-            result.setVolume(incites.getVolume());
-            result.setCitedTimes(incites.getCitedTimes());
+            result.setVolume(incites.getVolume());//6
+            result.setCitedTimes(incites.getCitedTimes());//10
             return result;
         }
     }

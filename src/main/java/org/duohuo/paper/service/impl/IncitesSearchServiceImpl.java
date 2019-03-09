@@ -20,9 +20,6 @@ import java.util.Optional;
 @Service("incitesSearchServiceImpl")
 public class IncitesSearchServiceImpl implements IncitesSearchService {
 
-    @Resource(name = "paperTypeManager")
-    private PaperTypeManager paperTypeManager;
-
     @Resource(name = "incitesManager")
     private IncitesManager incitesManager;
 
@@ -39,19 +36,27 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
     private CategoryManager categoryManager;
 
     @Override
-    public List<BaseRowModel> getDownByIdList(final List<Integer> idList) {
+    public List<BaseRowModel> getDownByIdList(List<Integer> idList) {
         List<Integer> newIncitesIdList = incitesManager.createNewIncitesIdList(idList);
         List<Incites> incitesList = incitesManager.findAllByIdList(newIncitesIdList);
-        List<Integer> schoolPaperTypeList = paperTypeManager.createSchoolPaperType();
         List<BaseRowModel> excelModelList = new ArrayList<>();
         for (Incites incites : incitesList) {
-            Optional<Paper> paper = paperManager.findMaxTimeDataByAccessionNumberPaperTypeList(incites.getAccessionNumber(), schoolPaperTypeList);
-            if (paper.isPresent()) {
-                excelModelList.add(IncitesConverter.convertIncitesToDownload(incites));
+            Optional<Paper> hot = paperManager.findMaxTimeSchoolHotDataByAccessionNumber(incites.getAccessionNumber());
+            Optional<Paper> highly = paperManager.findMaxTimeSchoolHighDataByAccessionNumber(incites.getAccessionNumber());
+            if (hot.isPresent()) {
+                if (highly.isPresent()) {
+                    excelModelList.add(IncitesConverter.convertIncitesToDownload(incites));
+                } else {
+                    excelModelList.add(IncitesConverter.convertIncitesToDownload(incites));
+                }
             } else {
-                BaseLine baseLine = baseLineManager.findByCategoryAndPercentAndYear(incites.getCategory());
-                double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue()) / 1.0;
-                excelModelList.add(IncitesConverter.convertIncitesToDownload(incites, value));
+                if (highly.isPresent()) {
+                    excelModelList.add(IncitesConverter.convertIncitesToDownload(incites));
+                } else {
+                    BaseLine baseLine = baseLineManager.findByCategoryAndPercentAndYear(incites.getCategory());
+                    double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue() * 1.0);
+                    excelModelList.add(IncitesConverter.convertIncitesToDownload(incites, value));
+                }
             }
         }
         return excelModelList;
@@ -127,17 +132,26 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
     }
 
     private JsonResult createJsonResult(final Page<Incites> page) {
-        List<IncitesResult> resultList = new ArrayList<>();
         List<Incites> pageList = page.getContent();
-        List<Integer> schoolPaperType = paperTypeManager.createSchoolPaperType();
+        List<IncitesResult> resultList = new ArrayList<>();
+        int num = 10 * page.getNumber();
         for (Incites incites : pageList) {
-            Optional<Paper> paper = paperManager.findMaxTimeDataByAccessionNumberPaperTypeList(incites.getAccessionNumber(), schoolPaperType);
-            if (paper.isPresent()) {
-                resultList.add(IncitesConverter.convertIncitesToResult(incites));
+            Optional<Paper> hot = paperManager.findMaxTimeSchoolHotDataByAccessionNumber(incites.getAccessionNumber());
+            Optional<Paper> highly = paperManager.findMaxTimeSchoolHighDataByAccessionNumber(incites.getAccessionNumber());
+            if (hot.isPresent()) {
+                if (highly.isPresent()) {
+                    resultList.add(IncitesConverter.convertIncitesToResult(incites, 3, ++num));
+                } else {
+                    resultList.add(IncitesConverter.convertIncitesToResult(incites, 1, ++num));
+                }
             } else {
-                BaseLine baseLine = baseLineManager.findByCategoryAndPercentAndYear(incites.getCategory());
-                double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue() * 1.0);
-                resultList.add(IncitesConverter.convertIncitesToResult(incites, value));
+                if (highly.isPresent()) {
+                    resultList.add(IncitesConverter.convertIncitesToResult(incites, 2, ++num));
+                } else {
+                    BaseLine baseLine = baseLineManager.findByCategoryAndPercentAndYear(incites.getCategory());
+                    double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue() * 1.0);
+                    resultList.add(IncitesConverter.convertIncitesToResult(incites, value, ++num));
+                }
             }
         }
         JsonResult result = new JsonResult();

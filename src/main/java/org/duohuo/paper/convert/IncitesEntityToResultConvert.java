@@ -15,25 +15,26 @@ class IncitesEntityToResultConvert extends Converter<IncitesResult, Incites> {
         @Override
         public IncitesResult apply(Incites incites) {
             IncitesResult result = new IncitesResult();
-            result.setAccessionNumber(incites.getAccessionNumber());
-            result.setArticleName(incites.getArticleName());
-            result.setAuthors(incites.getAuthors());
+            result.setAccessionNumber(incites.getAccessionNumber());//2
+            result.setArticleName(incites.getArticleName());//5
+            result.setAuthors(incites.getAuthors());//7
             result.setCategoryName(incites.getCategory().getCategoryName());
-            result.setDoi(incites.getDoi());
-            result.setJournalExpectCitedTimes(incites.getJournalExpectCitedTimes());
-            result.setJournalImpactFactor(incites.getJournalImpactFactor());
-            result.setJournalInfluence(incites.getJournalInfluence());
-            result.setLink(incites.getLink());
-            result.setPage(incites.getPage());
-            result.setPeriod(incites.getPeriod());
-            result.setPmid(incites.getPmid());
-            result.setPublicationDate(incites.getPublicationDate());
-            result.setSources(incites.getSources());
-            result.setSubjectAreaPercentile(incites.getSubjectAreaPercentile());
-            result.setSubjectExpectCitedTimes(incites.getSubjectExpectCitedTimes());
-            result.setVolume(incites.getVolume());
-            result.setSubjectInfluence(incites.getSubjectInfluence());
-            result.setIncitesId(incites.getIncitesId());
+            result.setDoi(incites.getDoi());//3
+            result.setJournalExpectCitedTimes(incites.getJournalExpectCitedTimes());//14
+            result.setJournalImpactFactor(incites.getJournalImpactFactor());//19
+            result.setJournalInfluence(incites.getJournalInfluence());//16
+            result.setLink(incites.getLink());//6
+            result.setPage(incites.getPage());//11
+            result.setPeriod(incites.getPeriod());//10
+            result.setPmid(incites.getPmid());//4
+            result.setPublicationDate(incites.getPublicationDate());//12
+            result.setSources(incites.getSources());//8
+            result.setSubjectAreaPercentile(incites.getSubjectAreaPercentile());//18
+            result.setSubjectExpectCitedTimes(incites.getSubjectExpectCitedTimes());//15
+            result.setVolume(incites.getVolume());//9
+            result.setSubjectInfluence(incites.getSubjectInfluence());//17
+            result.setIncitesId(incites.getIncitesId());//1
+            result.setCitedTimes(incites.getCitedTimes());//13
             return result;
         }
     }

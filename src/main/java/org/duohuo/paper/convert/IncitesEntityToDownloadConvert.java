@@ -15,24 +15,25 @@ class IncitesEntityToDownloadConvert extends Converter<IncitesDownloadExcelModel
         @Override
         public IncitesDownloadExcelModel apply(Incites incites) {
             IncitesDownloadExcelModel excelModel = new IncitesDownloadExcelModel();
-            excelModel.setVolume(incites.getVolume());
-            excelModel.setSubjectInfluence(incites.getSubjectInfluence());
-            excelModel.setCategoryName(incites.getCategory().getCategoryName());
-            excelModel.setPeriod(incites.getPeriod());
-            excelModel.setPmid(incites.getPmid());
-            excelModel.setPublicationDate(incites.getPublicationDate());
-            excelModel.setDoi(incites.getDoi());
-            excelModel.setJournalExpectCitedTimes(incites.getJournalExpectCitedTimes());
-            excelModel.setJournalImpactFactor(incites.getJournalImpactFactor());
             excelModel.setAccessionNumber(incites.getAccessionNumber());
+            excelModel.setDoi(incites.getDoi());
+            excelModel.setPmid(incites.getPmid());
             excelModel.setArticleName(incites.getArticleName());
-            excelModel.setAuthors(incites.getAuthors());
-            excelModel.setJournalInfluence(incites.getJournalInfluence());
             excelModel.setLink(incites.getLink());
-            excelModel.setPage(incites.getPage());
+            excelModel.setAuthors(incites.getAuthors());
             excelModel.setSources(incites.getSources());
-            excelModel.setSubjectAreaPercentile(incites.getSubjectAreaPercentile());
+            excelModel.setCategoryName(incites.getCategory().getCategoryName());
+            excelModel.setVolume(incites.getVolume());
+            excelModel.setPeriod(incites.getPeriod());
+            excelModel.setPage(incites.getPage());
+            excelModel.setPublicationDate(incites.getPublicationDate());
+            excelModel.setCitedTimes(incites.getCitedTimes());
+            excelModel.setJournalExpectCitedTimes(incites.getJournalExpectCitedTimes());
             excelModel.setSubjectExpectCitedTimes(incites.getSubjectExpectCitedTimes());
+            excelModel.setJournalInfluence(incites.getJournalInfluence());
+            excelModel.setSubjectInfluence(incites.getSubjectInfluence());
+            excelModel.setSubjectAreaPercentile(incites.getSubjectAreaPercentile());
+            excelModel.setJournalImpactFactor(incites.getJournalImpactFactor());
             return excelModel;
         }
     }

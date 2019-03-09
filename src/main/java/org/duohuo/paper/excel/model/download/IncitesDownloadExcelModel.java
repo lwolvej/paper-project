@@ -31,6 +31,9 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
     @ExcelProperty(index = 6, value = "来源")
     private String sources;
 
+    @ExcelProperty(index = 7, value = "学科领域")
+    private String categoryName;
+
     @ExcelProperty(index = 8, value = "卷")
     private String volume;
 
@@ -42,6 +45,9 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
 
     @ExcelProperty(index = 11, value = "出版年")
     private Integer publicationDate;
+
+    @ExcelProperty(index = 12, value = "被引频次")
+    private Integer citedTimes;
 
     @ExcelProperty(index = 12, value = "期刊预期被引频次")
     private String journalExpectCitedTimes;
@@ -60,9 +66,6 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
 
     @ExcelProperty(index = 17, value = "期刊影响因子")
     private String journalImpactFactor;
-
-    @ExcelProperty(index = 7, value = "学科领域")
-    private String categoryName;
 
     @ExcelProperty(index = 18, value = "卷")
     private String value;
@@ -222,6 +225,14 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
         this.value = value;
     }
 
+    public Integer getCitedTimes() {
+        return citedTimes;
+    }
+
+    public void setCitedTimes(Integer citedTimes) {
+        this.citedTimes = citedTimes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -234,23 +245,24 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
                 Objects.equals(link, that.link) &&
                 Objects.equals(authors, that.authors) &&
                 Objects.equals(sources, that.sources) &&
+                Objects.equals(categoryName, that.categoryName) &&
                 Objects.equals(volume, that.volume) &&
                 Objects.equals(period, that.period) &&
                 Objects.equals(page, that.page) &&
                 Objects.equals(publicationDate, that.publicationDate) &&
+                Objects.equals(citedTimes, that.citedTimes) &&
                 Objects.equals(journalExpectCitedTimes, that.journalExpectCitedTimes) &&
                 Objects.equals(subjectExpectCitedTimes, that.subjectExpectCitedTimes) &&
                 Objects.equals(journalInfluence, that.journalInfluence) &&
                 Objects.equals(subjectInfluence, that.subjectInfluence) &&
                 Objects.equals(subjectAreaPercentile, that.subjectAreaPercentile) &&
                 Objects.equals(journalImpactFactor, that.journalImpactFactor) &&
-                Objects.equals(categoryName, that.categoryName) &&
                 Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accessionNumber, doi, pmid, articleName, link, authors, sources, volume, period, page, publicationDate, journalExpectCitedTimes, subjectExpectCitedTimes, journalInfluence, subjectInfluence, subjectAreaPercentile, journalImpactFactor, categoryName, value);
+        return Objects.hash(accessionNumber, doi, pmid, articleName, link, authors, sources, categoryName, volume, period, page, publicationDate, citedTimes, journalExpectCitedTimes, subjectExpectCitedTimes, journalInfluence, subjectInfluence, subjectAreaPercentile, journalImpactFactor, value);
     }
 
     @Override
@@ -263,17 +275,18 @@ public class IncitesDownloadExcelModel extends BaseRowModel implements Serializa
                 ", link='" + link + '\'' +
                 ", authors='" + authors + '\'' +
                 ", sources='" + sources + '\'' +
+                ", categoryName='" + categoryName + '\'' +
                 ", volume='" + volume + '\'' +
                 ", period='" + period + '\'' +
                 ", page='" + page + '\'' +
                 ", publicationDate=" + publicationDate +
-                ", journalExpectCitedTimes=" + journalExpectCitedTimes +
-                ", subjectExpectCitedTimes=" + subjectExpectCitedTimes +
-                ", journalInfluence=" + journalInfluence +
-                ", subjectInfluence=" + subjectInfluence +
-                ", subjectAreaPercentile=" + subjectAreaPercentile +
+                ", citedTimes=" + citedTimes +
+                ", journalExpectCitedTimes='" + journalExpectCitedTimes + '\'' +
+                ", subjectExpectCitedTimes='" + subjectExpectCitedTimes + '\'' +
+                ", journalInfluence='" + journalInfluence + '\'' +
+                ", subjectInfluence='" + subjectInfluence + '\'' +
+                ", subjectAreaPercentile='" + subjectAreaPercentile + '\'' +
                 ", journalImpactFactor='" + journalImpactFactor + '\'' +
-                ", categoryName='" + categoryName + '\'' +
                 ", value='" + value + '\'' +
                 '}';
     }

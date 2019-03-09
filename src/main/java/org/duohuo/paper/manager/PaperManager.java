@@ -69,8 +69,13 @@ public class PaperManager {
         return paperRepository.findAllByPaperIdIn(idList);
     }
 
-    public Optional<Paper> findMaxTimeDataByAccessionNumberPaperTypeList(final String accessionNumber, final List<Integer> schoolPaperTypeList) {
-        return paperRepository.findMaxTimeDataByAccessionNumberPaperTypeIn(accessionNumber, schoolPaperTypeList);
+
+    public Optional<Paper> findMaxTimeSchoolHotDataByAccessionNumber(final String accessionNumber) {
+        return paperRepository.findMaxTimeDataByAccessionNumberPaperType(accessionNumber, 4);
+    }
+
+    public Optional<Paper> findMaxTimeSchoolHighDataByAccessionNumber(final String accessionNumber) {
+        return paperRepository.findMaxTimeDataByAccessionNumberPaperType(accessionNumber, 3);
     }
 
     @Cacheable(value = "paper_find_page_category_list", keyGenerator = "redisKeyGenerator")
