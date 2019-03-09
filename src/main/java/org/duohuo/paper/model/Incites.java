@@ -42,6 +42,10 @@ public class Incites implements Serializable {
     @Column(name = "sources")
     private String sources;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @Column(name = "volume")
     private String volume;
 
@@ -74,10 +78,6 @@ public class Incites implements Serializable {
 
     @Column(name = "journal_impact_factor")
     private String journalImpactFactor;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
 
     public Incites() {
     }
