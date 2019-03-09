@@ -49,7 +49,7 @@ public class IncitesResult implements Serializable {
 
     private Integer valueType;
 
-    private Double value;
+    private String value;
 
     private Integer elemNum;
 
@@ -208,11 +208,11 @@ public class IncitesResult implements Serializable {
         this.categoryName = categoryName;
     }
 
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

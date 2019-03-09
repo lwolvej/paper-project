@@ -26,9 +26,9 @@ public final class IncitesConverter {
         return incites;
     }
 
-    public synchronized static IncitesDownloadExcelModel convertIncitesToDownload(final Incites incites, final Double value) {
+    public synchronized static IncitesDownloadExcelModel convertIncitesToDownload(final Incites incites, final String value) {
         IncitesDownloadExcelModel model = converterEntityToDownload.convertFromOrigin(incites);
-        model.setValue(value.toString());
+        model.setValue(value);
         return model;
     }
 
@@ -36,7 +36,7 @@ public final class IncitesConverter {
         return converterEntityToDownload.convertFromOrigin(incites);
     }
 
-    public synchronized static IncitesResult convertIncitesToResult(final Incites incites, final Double value, final Integer elemNum) {
+    public synchronized static IncitesResult convertIncitesToResult(final Incites incites, final String value, final Integer elemNum) {
         IncitesResult result = converterEntityToResult.convertFromOrigin(incites);
         result.setValueType(0);
         result.setValue(value);

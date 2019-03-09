@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +42,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
         List<Integer> newIncitesIdList = incitesManager.createNewIncitesIdList(idList);
         List<Incites> incitesList = incitesManager.findAllByIdList(newIncitesIdList);
         List<BaseRowModel> excelModelList = new ArrayList<>();
+        DecimalFormat format = new DecimalFormat(".00");
         for (Incites incites : incitesList) {
             Optional<Paper> hot = paperManager.findMaxTimeSchoolHotDataByAccessionNumber(incites.getAccessionNumber());
             Optional<Paper> highly = paperManager.findMaxTimeSchoolHighDataByAccessionNumber(incites.getAccessionNumber());
@@ -60,8 +62,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
                     }
                     BaseLine baseLine = optional.get();
                     double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue() * 1.0);
-                    value = (((int) value * 100) * 1.0) / 100.0;
-                    excelModelList.add(IncitesConverter.convertIncitesToDownload(incites, value));
+                    excelModelList.add(IncitesConverter.convertIncitesToDownload(incites, format.format(value)));
                 }
             }
         }
@@ -141,6 +142,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
         List<Incites> pageList = page.getContent();
         List<IncitesResult> resultList = new ArrayList<>();
         int num = 10 * page.getNumber();
+        DecimalFormat format = new DecimalFormat(".00");
         for (Incites incites : pageList) {
             Optional<Paper> hot = paperManager.findMaxTimeSchoolHotDataByAccessionNumber(incites.getAccessionNumber());
             Optional<Paper> highly = paperManager.findMaxTimeSchoolHighDataByAccessionNumber(incites.getAccessionNumber());
@@ -159,8 +161,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
                         throw new NotFoundException("基准线无法找到对应实体");
                     }
                     double value = (incites.getCitedTimes() * 1.0) / (optional.get().getValue() * 1.0);
-                    value = (((int) value * 100) * 1.0) / 100.0;
-                    resultList.add(IncitesConverter.convertIncitesToResult(incites, value, ++num));
+                    resultList.add(IncitesConverter.convertIncitesToResult(incites, format.format(value), ++num));
                 }
             }
         }
