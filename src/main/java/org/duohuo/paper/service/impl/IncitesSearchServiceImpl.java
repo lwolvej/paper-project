@@ -14,7 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.text.DecimalFormat;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,9 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
         List<Integer> newIncitesIdList = incitesManager.createNewIncitesIdList(idList);
         List<Incites> incitesList = incitesManager.findAllByIdList(newIncitesIdList);
         List<BaseRowModel> excelModelList = new ArrayList<>();
-        DecimalFormat format = new DecimalFormat(".00");
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumFractionDigits(2);
+        numberFormat.setRoundingMode(RoundingMode.UP);
         for (Incites incites : incitesList) {
             Optional<Paper> hot = paperManager.findMaxTimeSchoolHotDataByAccessionNumber(incites.getAccessionNumber());
             Optional<Paper> highly = paperManager.findMaxTimeSchoolHighDataByAccessionNumber(incites.getAccessionNumber());
@@ -62,7 +65,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
                     }
                     BaseLine baseLine = optional.get();
                     double value = (incites.getCitedTimes() * 1.0) / (baseLine.getValue() * 1.0);
-                    excelModelList.add(IncitesConverter.convertIncitesToDownload(incites, format.format(value)));
+                    excelModelList.add(IncitesConverter.convertIncitesToDownload(incites, numberFormat.format(value)));
                 }
             }
         }
@@ -73,7 +76,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
     public JsonResult searchByNone(final Integer pageNum, final Boolean ifDesc) {
         return createJsonResult(
                 incitesManager.findAll(
-                        pageManager.pageRequestCreate(pageNum, ifDesc, "publicationDate", "accessionNumber"))
+                        pageManager.pageRequestCreate(pageNum, ifDesc, "citedTimes", "accessionNumber"))
         );
     }
 
@@ -81,7 +84,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
     public JsonResult searchByAccessionNumber(final Integer pageNum, final Boolean ifDesc, final String accessionNumber) {
         return createJsonResult(
                 incitesManager.findAllByAccessionNumber(accessionNumber,
-                        pageManager.pageRequestCreate(pageNum, ifDesc, "publicationDate", "accessionNumber"))
+                        pageManager.pageRequestCreate(pageNum, ifDesc, "citedTimes", "accessionNumber"))
         );
     }
 
@@ -89,7 +92,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
     public JsonResult searchByDoi(final Integer pageNum, final Boolean ifDesc, final String doi) {
         return createJsonResult(
                 incitesManager.findAllByDoi(doi,
-                        pageManager.pageRequestCreate(pageNum, ifDesc, "publicationDate", "accessionNumber"))
+                        pageManager.pageRequestCreate(pageNum, ifDesc, "citedTimes", "accessionNumber"))
         );
     }
 
@@ -97,7 +100,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
     public JsonResult searchByArticleName(final Integer pageNum, final Boolean ifDesc, final String articleName) {
         return createJsonResult(
                 incitesManager.findAllByKeyWord(articleName,
-                        pageManager.pageRequestCreate(pageNum, ifDesc, "publication_date", "accession_number"))
+                        pageManager.pageRequestCreate(pageNum, ifDesc, "cited_times", "accession_number"))
         );
     }
 
@@ -106,7 +109,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
         return createJsonResult(
                 incitesManager.findAllByCategoryList(
                         categoryManager.createNewCategoryIdList(categoryIdList),
-                        pageManager.pageRequestCreate(pageNum, ifDesc, "publicationDate", "accessionNumber"))
+                        pageManager.pageRequestCreate(pageNum, ifDesc, "citedTimes", "accessionNumber"))
         );
     }
 
@@ -115,7 +118,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
         return createJsonResult(
                 incitesManager.findAllByAccessionNumberCategoryList(
                         accessionNumber, categoryManager.createNewCategoryIdList(categoryIdList),
-                        pageManager.pageRequestCreate(pageNum, ifDesc, "publicationDate", "accessionNumber"))
+                        pageManager.pageRequestCreate(pageNum, ifDesc, "citedTimes", "accessionNumber"))
         );
     }
 
@@ -124,7 +127,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
         return createJsonResult(
                 incitesManager.findAllByDoiCategoryList(
                         doi, categoryManager.createNewCategoryIdList(categoryIdList),
-                        pageManager.pageRequestCreate(pageNum, ifDesc, "publicationDate", "accessionNumber"))
+                        pageManager.pageRequestCreate(pageNum, ifDesc, "citedTimes", "accessionNumber"))
         );
     }
 
@@ -133,7 +136,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
         return createJsonResult(
                 incitesManager.findAllByKeyWordCategoryList(
                         articleName, categoryManager.createNewCategoryIdList(categoryIdList),
-                        pageManager.pageRequestCreate(pageNum, ifDesc, "publication_date", "accession_number")
+                        pageManager.pageRequestCreate(pageNum, ifDesc, "cited_times", "accession_number")
                 )
         );
     }
@@ -142,7 +145,9 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
         List<Incites> pageList = page.getContent();
         List<IncitesResult> resultList = new ArrayList<>();
         int num = 10 * page.getNumber();
-        DecimalFormat format = new DecimalFormat(".00");
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumFractionDigits(2);
+        numberFormat.setRoundingMode(RoundingMode.UP);
         for (Incites incites : pageList) {
             Optional<Paper> hot = paperManager.findMaxTimeSchoolHotDataByAccessionNumber(incites.getAccessionNumber());
             Optional<Paper> highly = paperManager.findMaxTimeSchoolHighDataByAccessionNumber(incites.getAccessionNumber());
@@ -161,7 +166,7 @@ public class IncitesSearchServiceImpl implements IncitesSearchService {
                         throw new NotFoundException("基准线无法找到对应实体");
                     }
                     double value = (incites.getCitedTimes() * 1.0) / (optional.get().getValue() * 1.0);
-                    resultList.add(IncitesConverter.convertIncitesToResult(incites, format.format(value), ++num));
+                    resultList.add(IncitesConverter.convertIncitesToResult(incites, numberFormat.format(value), ++num));
                 }
             }
         }
