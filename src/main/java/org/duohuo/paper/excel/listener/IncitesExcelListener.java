@@ -27,7 +27,7 @@ public class IncitesExcelListener extends AnalysisEventListener<IncitesExcelMode
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-        LOGGER.info("成功处理一个Excel!");
+        LOGGER.info("成功处理一个Excel.被引频次.");
     }
 
     public Vector<IncitesExcelModel> getVector() {

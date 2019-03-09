@@ -101,5 +101,4 @@ public class JournalManager {
     public Page<Journal> findAll(final PageRequest request) {
         return journalRepository.findAll(request);
     }
-
 }

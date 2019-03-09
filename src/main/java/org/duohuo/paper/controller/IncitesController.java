@@ -44,7 +44,7 @@ public class IncitesController {
         return incitesFacade.searchFacade(searchDto);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD, type = KeyOperation.Type.INCITES)
     @ApiOperation(value = "被引频次上传", notes = "被引频次上传，上传一个excel")
     @PostMapping(value = "/upload")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})

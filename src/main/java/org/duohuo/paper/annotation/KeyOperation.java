@@ -15,5 +15,14 @@ public @interface KeyOperation {
         DELETE
     }
 
-    Operation operation() ;
+    enum Type {
+        JOURNAL,
+        PAPER,
+        INCITES,
+        BASELINE
+    }
+
+    Operation operation();
+
+    Type type();
 }

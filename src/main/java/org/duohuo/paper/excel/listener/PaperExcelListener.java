@@ -27,7 +27,7 @@ public class PaperExcelListener extends AnalysisEventListener<PaperExcelModel> {
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-        LOGGER.info("成功处理一个Excel!");
+        LOGGER.info("成功处理一个excel.论文.");
     }
 
     public Vector<PaperExcelModel> getVector() {

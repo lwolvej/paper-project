@@ -43,7 +43,7 @@ public class PaperController {
     @Resource(name = "paperFacade")
     private PaperFacade paperFacade;
 
-    @KeyOperation(operation = KeyOperation.Operation.DELETE)
+    @KeyOperation(operation = KeyOperation.Operation.DELETE, type = KeyOperation.Type.PAPER)
     @ApiOperation(value = "删除esi高被引某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/esi/highlyCited/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -51,7 +51,7 @@ public class PaperController {
         return paperFacade.deletePaperFacade(deleteDto, 1);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.DELETE)
+    @KeyOperation(operation = KeyOperation.Operation.DELETE, type = KeyOperation.Type.PAPER)
     @ApiOperation(value = "删除esi热点某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/esi/hot/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -59,7 +59,7 @@ public class PaperController {
         return paperFacade.deletePaperFacade(deleteDto, 2);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.DELETE)
+    @KeyOperation(operation = KeyOperation.Operation.DELETE, type = KeyOperation.Type.PAPER)
     @ApiOperation(value = "删除我校高被引某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/school/highlyCited/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -67,7 +67,7 @@ public class PaperController {
         return paperFacade.deletePaperFacade(deleteDto, 3);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.DELETE)
+    @KeyOperation(operation = KeyOperation.Operation.DELETE, type = KeyOperation.Type.PAPER)
     @ApiOperation(value = "删除esi热点某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/school/hot/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -105,13 +105,13 @@ public class PaperController {
     @RequestLimit(count = 20)
     @ApiOperation(value = "本校热点", notes = "搜索条件有年月和学科名称")
     @Cacheable(value = "paper_school_hot_search_all", keyGenerator = "redisKeyGenerator")
-    @PostMapping(value = "/school/hotPaper/search")
+    @PostMapping(value = "/school/hot/search")
     @RequiresAuthentication
     public JsonResult paperSchoolHotSearch(@ApiParam("查询条件") @RequestBody SearchDto searchDto) {
         return paperFacade.paperSearchFacade(searchDto, 4);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD, type = KeyOperation.Type.PAPER)
     @Upload
     @ApiOperation(value = "esi论文高被引上传", notes = "esi高被引论文上传, 上传一个zip压缩包")
     @PostMapping(value = "/esi/highlyCited/upload")
@@ -122,7 +122,7 @@ public class PaperController {
         return paperFacade.uploadFileFacade(file, year, month, 1);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD, type = KeyOperation.Type.PAPER)
     @Upload
     @ApiOperation(value = "esi论文热点论文上传", notes = "esi热点论文上传，上传一个zip压缩包")
     @PostMapping(value = "/esi/hot/upload")
@@ -133,7 +133,7 @@ public class PaperController {
         return paperFacade.uploadFileFacade(file, year, month, 2);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD, type = KeyOperation.Type.PAPER)
     @Upload
     @ApiOperation(value = "本校高被引论文上传", notes = "本校高被引论文上传，上传一个zip包")
     @PostMapping("/school/highlyCited/upload")
@@ -144,7 +144,7 @@ public class PaperController {
         return paperFacade.uploadFileFacade(file, year, month, 3);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD, type = KeyOperation.Type.PAPER)
     @Upload
     @ApiOperation(value = "本校热点论文上传", notes = "本校热点论文上传, 上传一个zip包")
     @PostMapping("/school/hot/upload")

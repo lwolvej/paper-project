@@ -29,7 +29,7 @@ public class JournalController {
     @Resource(name = "journalFacade")
     private JournalFacade journalFacade;
 
-    @KeyOperation(operation = KeyOperation.Operation.DELETE)
+    @KeyOperation(operation = KeyOperation.Operation.DELETE, type = KeyOperation.Type.JOURNAL)
     @ApiOperation(value = "删除期刊某年月信息", notes = "删除该年月下的全部")
     @PostMapping(value = "/delete")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
@@ -81,7 +81,7 @@ public class JournalController {
         return journalFacade.esiSearchFacade(searchDto);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD, type = KeyOperation.Type.JOURNAL)
     @ApiOperation(value = "期刊上传", notes = "期刊上传，上传一个excel")
     @PostMapping(value = "/upload")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})

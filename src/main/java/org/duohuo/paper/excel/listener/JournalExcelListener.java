@@ -27,7 +27,7 @@ public class JournalExcelListener extends AnalysisEventListener<JournalExcelMode
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-        LOGGER.info("成功处理一个Excel!");
+        LOGGER.info("成功处理一个excel.期刊.");
     }
 
     public Vector<JournalExcelModel> getVector() {

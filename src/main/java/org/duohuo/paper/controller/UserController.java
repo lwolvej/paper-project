@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.duohuo.paper.annotation.KeyOperation;
 import org.duohuo.paper.annotation.RequestLimit;
 import org.duohuo.paper.facade.UserFacade;
 import org.duohuo.paper.model.dto.UserDto;
@@ -33,7 +32,6 @@ public class UserController {
         return userFacade.loginFacade(userDto);
     }
 
-    @KeyOperation(operation = KeyOperation.Operation.UPLOAD)
     @ApiOperation(value = "用户注册")
     @PostMapping("/register")
     @ResponseBody

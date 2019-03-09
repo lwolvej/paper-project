@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.duohuo.paper.annotation.KeyOperation;
 import org.duohuo.paper.annotation.RequestLimit;
 import org.duohuo.paper.facade.BaseLineFacade;
 import org.duohuo.paper.model.dto.BaseLineSearchDto;
@@ -38,6 +39,7 @@ public class BaseLineController {
         return baseLineFacade.searchByAll();
     }
 
+    @KeyOperation(operation = KeyOperation.Operation.UPLOAD, type = KeyOperation.Type.BASELINE)
     @ApiOperation(value = "基准线上传", notes = "基准线上传，上传一个excel")
     @PostMapping(value = "/upload")
     @RequiresPermissions(logical = Logical.AND, value = {"edit"})
